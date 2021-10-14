@@ -1,4 +1,4 @@
-import Ship from '../ship';
+import Ship from '../Ship';
 
 const s = Ship(3);
 test('A ship is object - it exists', () => {

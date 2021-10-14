@@ -1,0 +1,55 @@
+import Gameboard from '../Gameboard';
+
+const g = Gameboard();
+test('The gameboard exists', () => {
+  expect(g).toBeDefined();
+});
+
+test('A ship can be placed', () => {
+  expect(g.shipCount()).toBe(0);
+  g.addShip([
+    { x: 1, y: 3 },
+    { x: 2, y: 3 },
+    { x: 3, y: 3 },
+  ]);
+  expect(g.shipCount()).toBe(1);
+});
+
+test('A ship cannot be placed out of bounds', () => {
+  expect(g.shipCount()).toBe(1);
+  g.addShip([
+    { x: 9, y: 5 },
+    { x: 10, y: 5 },
+  ]);
+  expect(g.shipCount()).toBe(1);
+});
+
+test('A ship cannot overlap another ship', () => {
+  expect(g.shipCount()).toBe(1);
+  g.addShip([
+    { x: 3, y: 3 },
+    { x: 3, y: 4 },
+  ]);
+  expect(g.shipCount()).toBe(1);
+});
+
+test('We can have multiple ships of multiple sizes', () => {
+  g.addShip([
+    { x: 5, y: 4 },
+    { x: 5, y: 5 },
+    { x: 5, y: 6 },
+    { x: 5, y: 7 },
+  ]);
+  expect(g.shipCount()).toBe(2);
+});
+
+test('Attacks can be made resulting in a hit or a miss', () => {
+  expect(g.receiveAttack({ x: 1, y: 1 })).toEqual('miss');
+  expect(g.receiveAttack({ x: 2, y: 3 })).toEqual('hit');
+});
+
+test('The same attack cannot be made more than once', () => {
+  expect(g.receiveAttack({ x: 1, y: 1 })).toEqual('invalid');
+  expect(g.receiveAttack({ x: 1, y: 1 })).toEqual('invalid');
+  expect(g.receiveAttack({ x: 2, y: 3 })).toEqual('invalid');
+});
