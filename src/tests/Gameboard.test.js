@@ -60,3 +60,16 @@ test('The board updates the number of ships when one is sunk', () => {
   g.receiveAttack({ x: 3, y: 3 });
   expect(g.shipCount()).toBe(1);
 });
+
+test('The board knows when all ships have been sunk', () => {
+  expect(g.shipCount()).toBe(1);
+  g.receiveAttack({ x: 5, y: 4 });
+  g.receiveAttack({ x: 5, y: 5 });
+  g.receiveAttack({ x: 5, y: 6 });
+  g.receiveAttack({ x: 5, y: 7 });
+  expect(g.shipCount()).toBe(0);
+});
+
+// I think the best way to check for a game over is to just get the ship count
+// after each time you get a 'sunk' message
+// I think any other way just adds code without justifying its existence
