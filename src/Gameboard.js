@@ -1,9 +1,9 @@
 import Ship from './Ship';
 
 const Gameboard = () => {
-  let ships = [];
+  let ships = 0;
   let tiles = [];
-  const shipCount = () => ships.length;
+  const shipCount = () => ships;
   const addShip = (coords) => {
     // check if the ship placement is valid
     for (let i = 0; i < coords.length; i += 1) {
@@ -27,7 +27,7 @@ const Gameboard = () => {
 
     // checks have passed, lets actually add the ship
     const s = Ship(coords.length);
-    ships = ships.concat(s);
+    ships += 1;
     for (let i = 0; i < coords.length; i += 1) {
       const tile = coords[i];
       tile.type = 'ship';
@@ -40,15 +40,22 @@ const Gameboard = () => {
     const attack = tiles.find(
       (tile) => tile.x === coord.x && tile.y === coord.y
     );
+    let sunk = false;
 
     // this is a valid attack on a ship
     if (attack && attack.type === 'ship') {
       tiles = tiles.map((tile) => {
         if (tile.x === coord.x && tile.y === coord.y) {
           tile.type = 'hit';
+          tile.ship.takeHit();
+          sunk = tile.ship.isSunk();
         }
         return tile;
       });
+      if (sunk) {
+        ships -= 1;
+        return 'sunk';
+      }
       return 'hit';
     }
 

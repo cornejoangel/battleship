@@ -53,3 +53,10 @@ test('The same attack cannot be made more than once', () => {
   expect(g.receiveAttack({ x: 1, y: 1 })).toEqual('invalid');
   expect(g.receiveAttack({ x: 2, y: 3 })).toEqual('invalid');
 });
+
+test('The board updates the number of ships when one is sunk', () => {
+  expect(g.shipCount()).toBe(2);
+  g.receiveAttack({ x: 1, y: 3 });
+  g.receiveAttack({ x: 3, y: 3 });
+  expect(g.shipCount()).toBe(1);
+});
