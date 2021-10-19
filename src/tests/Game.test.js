@@ -14,7 +14,7 @@ test('The game sets up ships for both players', () => {
 });
 
 test('The first player is able to make a move', () => {
-  const firstMove = game.move(1, { x: 7, y: 7 });
+  const firstMove = game.move(1, { x: 1, y: 3 });
   expect(firstMove).toBeDefined();
 });
 
@@ -34,14 +34,23 @@ test('The second player is not imediately able to make another move', () => {
 });
 
 test('The first player is able to move again', () => {
-  const thirdMove = game.move(1, { x: 1, y: 1 });
+  const thirdMove = game.move(1, { x: 2, y: 3 });
   expect(thirdMove).toBe('hit');
   expect(thirdMove).toBeDefined();
 });
 
 test('The game allows no further moves when a player is out of ships', () => {
+  // just sinking all of p2's ships
   game.move(2, { x: 1, y: 1 });
-  const finalMove = game.move(1, { x: 1, y: 2 });
+  game.move(1, { x: 3, y: 3 });
+  game.move(2, { x: 2, y: 2 });
+  game.move(1, { x: 5, y: 4 });
+  game.move(2, { x: 3, y: 3 });
+  game.move(1, { x: 5, y: 5 });
+  game.move(2, { x: 4, y: 4 });
+  game.move(1, { x: 5, y: 6 });
+  game.move(2, { x: 5, y: 5 });
+  const finalMove = game.move(1, { x: 5, y: 7 });
   const tooLateMove = game.move(2, { x: 2, y: 2 });
   const anotherMove = game.move(1, { x: 3, y: 3 });
   expect(finalMove).toBe('player 1 wins');

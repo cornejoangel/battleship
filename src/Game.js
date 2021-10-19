@@ -20,16 +20,26 @@ const Game = () => {
   const placeShips = () => {
     // place ships for both players
     playerOneBoard.addShip([
-      { x: 1, y: 1 },
-      { x: 1, y: 2 },
+      { x: 1, y: 3 },
+      { x: 2, y: 3 },
+      { x: 3, y: 3 },
     ]);
     playerOneBoard.addShip([
-      { x: 3, y: 3 },
-      { x: 3, y: 4 },
+      { x: 5, y: 4 },
+      { x: 5, y: 5 },
+      { x: 5, y: 6 },
+      { x: 5, y: 7 },
     ]);
     playerTwoBoard.addShip([
-      { x: 1, y: 1 },
-      { x: 1, y: 2 },
+      { x: 1, y: 3 },
+      { x: 2, y: 3 },
+      { x: 3, y: 3 },
+    ]);
+    playerTwoBoard.addShip([
+      { x: 5, y: 4 },
+      { x: 5, y: 5 },
+      { x: 5, y: 6 },
+      { x: 5, y: 7 },
     ]);
   };
 
