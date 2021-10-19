@@ -4,14 +4,8 @@ import Tile from './Tile';
 import '../styles/Grid.css';
 
 const Grid = (props) => {
-  const { player, name } = props;
+  const { player, name, tileSet } = props;
 
-  let tileSet = [];
-  for (let i = 0; i < 10; i += 1) {
-    for (let j = 0; j < 10; j += 1) {
-      tileSet = tileSet.concat({ x: j, y: i });
-    }
-  }
   return (
     <div className={`grid ${name} player${player}`}>
       {tileSet.map((tile) => (
@@ -24,6 +18,7 @@ const Grid = (props) => {
 Grid.propTypes = {
   player: PropTypes.number,
   name: PropTypes.string,
+  tileSet: PropTypes.array,
 };
 
 export default Grid;
