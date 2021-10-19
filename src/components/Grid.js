@@ -9,7 +9,12 @@ const Grid = (props) => {
   return (
     <div className={`grid ${name} player${player}`}>
       {tileSet.map((tile) => (
-        <Tile type="" x={tile.x} y={tile.y} />
+        <Tile
+          type={tile.type}
+          x={tile.x}
+          y={tile.y}
+          key={`${tile.x}${tile.y}`}
+        />
       ))}
     </div>
   );

@@ -70,7 +70,9 @@ const Gameboard = () => {
     return 'miss';
   };
 
-  return { shipCount, addShip, receiveAttack };
+  const getTiles = () => tiles;
+
+  return { shipCount, addShip, receiveAttack, getTiles };
 };
 
 export default Gameboard;

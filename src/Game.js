@@ -81,7 +81,18 @@ const Game = () => {
     return result;
   };
 
-  return { placeShips, playerOneShips, playerTwoShips, move };
+  const getPOneBoard = () => playerOneBoard.getTiles();
+
+  const getPTwoBoard = () => playerTwoBoard.getTiles();
+
+  return {
+    placeShips,
+    playerOneShips,
+    playerTwoShips,
+    move,
+    getPOneBoard,
+    getPTwoBoard,
+  };
 };
 
 export default Game;
