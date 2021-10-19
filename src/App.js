@@ -30,7 +30,6 @@ const App = () => {
   const [playerOneBoard, setPlayerOneBoard] = useState(tileSet);
   const [playerTwoBoard, setPlayerTwoBoard] = useState(tileSet);
 
-  console.log(playerOneBoard);
   return (
     <main>
       <Grid player={1} name="enemy" tileSet={playerTwoBoard} />
