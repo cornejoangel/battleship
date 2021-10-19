@@ -3,4 +3,8 @@
   height: 40px;
   border: 1px solid black;
   box-sizing: border-box;
+  text-align: center;
+  line-height: 40px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 100;
 }

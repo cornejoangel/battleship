@@ -9,13 +9,13 @@ const Grid = (props) => {
   let tileSet = [];
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
-      tileSet = tileSet.concat({ i, j });
+      tileSet = tileSet.concat({ x: j, y: i });
     }
   }
   return (
     <div className={`grid ${name} player${player}`}>
       {tileSet.map((tile) => (
-        <Tile type="" />
+        <Tile type="" x={tile.x} y={tile.y} />
       ))}
     </div>
   );
