@@ -6,21 +6,20 @@ import './styles/App.css';
 import setupShipTiles from './modules/setupShipTiles';
 
 const App = () => {
-  const game = useState(Game());
+  const [game, setGame] = useState(Game());
   // const [tiles, setTiles] = useState(setupShipTiles());
   const [playerOneBoard, setPlayerOneBoard] = useState(setupShipTiles());
   const [playerTwoBoard, setPlayerTwoBoard] = useState(setupShipTiles());
 
   const attack = (e, player, coords) => {
     e.preventDefault();
-    console.log(coords);
-    // let result = '';
-    // result = game.move(player, coords);
-    // if (result === 'invalid') {
-    //   alert('invalid move! make another');
-    // } else {
-    //   alert(result);
-    // }
+    let result = '';
+    result = game.move(player, coords);
+    if (result === 'invalid') {
+      alert('invalid move! make another');
+    } else {
+      alert(result);
+    }
   };
 
   return (
