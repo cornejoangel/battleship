@@ -3,13 +3,11 @@ import Grid from './components/Grid';
 import Game from './modules/Game';
 import './styles/normalize.css';
 import './styles/App.css';
-import setupShipTiles from './modules/setupShipTiles';
 
 const App = () => {
   const [game, setGame] = useState(Game());
-  // const [tiles, setTiles] = useState(setupShipTiles());
-  const [playerOneBoard, setPlayerOneBoard] = useState(setupShipTiles());
-  const [playerTwoBoard, setPlayerTwoBoard] = useState(setupShipTiles());
+  const [playerOneBoard, setPlayerOneBoard] = useState(game.getPOneBoard());
+  const [playerTwoBoard, setPlayerTwoBoard] = useState(game.getPTwoBoard());
 
   const attack = (e, player, coords) => {
     e.preventDefault();
@@ -20,7 +18,15 @@ const App = () => {
     } else {
       alert(result);
     }
+    setPlayerOneBoard(game.getPOneBoard());
+    setPlayerTwoBoard(game.getPTwoBoard());
   };
+
+  if (game.playerOneShips() === 0 && game.playerTwoShips() === 0) {
+    game.placeShips();
+    setPlayerOneBoard(game.getPOneBoard());
+    setPlayerTwoBoard(game.getPTwoBoard());
+  }
 
   return (
     <main>
