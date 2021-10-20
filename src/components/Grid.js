@@ -4,14 +4,22 @@ import Tile from './Tile';
 import '../styles/Grid.css';
 
 const Grid = (props) => {
-  const { player, name, tileSet } = props;
+  const { player, name, tileSet, attack } = props;
 
   let grid = null;
   if (name === 'enemy') {
     grid = (
       <div className={`grid ${name} player${player}`}>
         {tileSet.map((tile) => (
-          <Tile type="" x={tile.x} y={tile.y} key={`${tile.x}${tile.y}`} />
+          <Tile
+            type=""
+            x={tile.x}
+            y={tile.y}
+            name={name}
+            player={player}
+            key={`${tile.x}${tile.y}`}
+            attack={attack}
+          />
         ))}
       </div>
     );
@@ -23,6 +31,7 @@ const Grid = (props) => {
             type={tile.type}
             x={tile.x}
             y={tile.y}
+            name={name}
             key={`${tile.x}${tile.y}`}
           />
         ))}
@@ -37,6 +46,7 @@ Grid.propTypes = {
   player: PropTypes.number,
   name: PropTypes.string,
   tileSet: PropTypes.array,
+  attack: PropTypes.func,
 };
 
 export default Grid;
