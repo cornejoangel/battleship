@@ -1,4 +1,4 @@
-import Gameboard from '../Gameboard';
+import Gameboard from '../modules/Gameboard';
 
 const g = Gameboard();
 test('The gameboard exists', () => {

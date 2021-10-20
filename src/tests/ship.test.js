@@ -1,4 +1,4 @@
-import Ship from '../Ship';
+import Ship from '../modules/Ship';
 
 const s = Ship(3);
 test('A ship is object - it exists', () => {

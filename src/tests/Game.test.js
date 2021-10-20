@@ -1,4 +1,4 @@
-import Game from '../Game';
+import Game from '../modules/Game';
 
 const game = Game();
 
