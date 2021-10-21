@@ -18,3 +18,7 @@
 .miss {
   background-color: #fff;
 }
+
+.hit {
+  background-color: red;
+}
