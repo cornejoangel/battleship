@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Grid from './components/Grid';
 import TurnIndicator from './components/TurnIndicator';
 import ResetButton from './components/ResetButton';
+import ShipTray from './components/ShipTray';
 import Game from './modules/Game';
 import './styles/normalize.css';
 import './styles/App.css';
@@ -10,8 +11,7 @@ const App = () => {
   const [game, setGame] = useState(Game());
   const [playerOneBoard, setPlayerOneBoard] = useState(game.getPOneBoard());
   const [playerTwoBoard, setPlayerTwoBoard] = useState(game.getPTwoBoard());
-  let testingView = null;
-  testingView = true;
+  const [placing, setPlacing] = useState(true);
 
   const attack = (e, player, coords) => {
     e.preventDefault();
@@ -37,38 +37,26 @@ const App = () => {
   const reset = () => {
     setGame(Game());
     game.reset();
-    game.placeShips();
+    // game.placeShips();
     setPlayerOneBoard(game.getPOneBoard());
     setPlayerTwoBoard(game.getPTwoBoard());
+    setPlacing(true);
   };
 
-  if (game.playerOneShips() === 0 && game.playerTwoShips() === 0) {
-    game.placeShips();
-    setPlayerOneBoard(game.getPOneBoard());
-    setPlayerTwoBoard(game.getPTwoBoard());
-  }
+  // if (game.playerOneShips() === 0 && game.playerTwoShips() === 0) {
+  //   game.placeShips();
+  //   setPlayerOneBoard(game.getPOneBoard());
+  //   setPlayerTwoBoard(game.getPTwoBoard());
+  // }
 
   let screen = null;
-  testingView = false;
 
-  if (testingView) {
+  if (placing) {
     screen = (
       <main>
-        <TurnIndicator player={game.getCurrentTurn()} />
-        <Grid
-          player={1}
-          name="enemy"
-          tileSet={playerTwoBoard}
-          attack={attack}
-        />
+        <ShipTray />
+        <h2 className="friendly-heading">place your ships</h2>
         <Grid player={1} name="friendly" tileSet={playerOneBoard} />
-        <Grid
-          player={2}
-          name="enemy"
-          tileSet={playerOneBoard}
-          attack={attack}
-        />
-        <Grid player={2} name="friendly" tileSet={playerTwoBoard} />
         <ResetButton reset={reset} />
       </main>
     );
