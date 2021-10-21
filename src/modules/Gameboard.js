@@ -72,7 +72,9 @@ const Gameboard = () => {
 
   const getTiles = () => tiles;
 
-  return { shipCount, addShip, receiveAttack, getTiles };
+  const resetTiles = () => (tiles = []);
+
+  return { shipCount, addShip, receiveAttack, getTiles, resetTiles };
 };
 
 export default Gameboard;

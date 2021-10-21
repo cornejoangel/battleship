@@ -87,6 +87,11 @@ const Game = () => {
 
   const getCurrentTurn = () => currentTurn;
 
+  const reset = () => {
+    playerOneBoard.resetTiles();
+    playerTwoBoard.resetTiles();
+  };
+
   return {
     placeShips,
     playerOneShips,
@@ -95,6 +100,7 @@ const Game = () => {
     getPOneBoard,
     getPTwoBoard,
     getCurrentTurn,
+    reset,
   };
 };
 

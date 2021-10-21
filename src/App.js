@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Grid from './components/Grid';
 import TurnIndicator from './components/TurnIndicator';
+import ResetButton from './components/ResetButton';
 import Game from './modules/Game';
 import './styles/normalize.css';
 import './styles/App.css';
@@ -23,6 +24,14 @@ const App = () => {
     setPlayerTwoBoard(game.getPTwoBoard());
   };
 
+  const reset = () => {
+    setGame(Game());
+    game.reset();
+    game.placeShips();
+    setPlayerOneBoard(game.getPOneBoard());
+    setPlayerTwoBoard(game.getPTwoBoard());
+  };
+
   if (game.playerOneShips() === 0 && game.playerTwoShips() === 0) {
     game.placeShips();
     setPlayerOneBoard(game.getPOneBoard());
@@ -36,6 +45,7 @@ const App = () => {
       <Grid player={1} name="friendly" tileSet={playerOneBoard} />
       <Grid player={2} name="enemy" tileSet={playerOneBoard} attack={attack} />
       <Grid player={2} name="friendly" tileSet={playerTwoBoard} />
+      <ResetButton reset={reset} />
     </main>
   );
 };
