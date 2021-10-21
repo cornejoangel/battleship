@@ -4,3 +4,15 @@ main {
   grid-template-rows: repeat(3, auto);
   justify-items: center;
 }
+
+h2 {
+  grid-row: 1;
+}
+
+.enemy-heading {
+  grid-column: 2;
+}
+
+.friendly-heading {
+  grid-column: 1;
+}

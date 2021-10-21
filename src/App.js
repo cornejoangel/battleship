@@ -10,6 +10,8 @@ const App = () => {
   const [game, setGame] = useState(Game());
   const [playerOneBoard, setPlayerOneBoard] = useState(game.getPOneBoard());
   const [playerTwoBoard, setPlayerTwoBoard] = useState(game.getPTwoBoard());
+  let testingView = null;
+  testingView = true;
 
   const attack = (e, player, coords) => {
     e.preventDefault();
@@ -46,16 +48,47 @@ const App = () => {
     setPlayerTwoBoard(game.getPTwoBoard());
   }
 
-  return (
-    <main>
-      <TurnIndicator player={game.getCurrentTurn()} />
-      <Grid player={1} name="enemy" tileSet={playerTwoBoard} attack={attack} />
-      <Grid player={1} name="friendly" tileSet={playerOneBoard} />
-      <Grid player={2} name="enemy" tileSet={playerOneBoard} attack={attack} />
-      <Grid player={2} name="friendly" tileSet={playerTwoBoard} />
-      <ResetButton reset={reset} />
-    </main>
-  );
+  let screen = null;
+  testingView = false;
+
+  if (testingView) {
+    screen = (
+      <main>
+        <TurnIndicator player={game.getCurrentTurn()} />
+        <Grid
+          player={1}
+          name="enemy"
+          tileSet={playerTwoBoard}
+          attack={attack}
+        />
+        <Grid player={1} name="friendly" tileSet={playerOneBoard} />
+        <Grid
+          player={2}
+          name="enemy"
+          tileSet={playerOneBoard}
+          attack={attack}
+        />
+        <Grid player={2} name="friendly" tileSet={playerTwoBoard} />
+        <ResetButton reset={reset} />
+      </main>
+    );
+  } else {
+    screen = (
+      <main>
+        <h2 className="enemy-heading">enemy waters</h2>
+        <Grid
+          player={1}
+          name="enemy"
+          tileSet={playerTwoBoard}
+          attack={attack}
+        />
+        <h2 className="friendly-heading">friendly waters</h2>
+        <Grid player={1} name="friendly" tileSet={playerOneBoard} />
+        <ResetButton reset={reset} />
+      </main>
+    );
+  }
+  return screen;
 };
 
 export default App;
