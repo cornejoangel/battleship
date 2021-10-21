@@ -85,6 +85,8 @@ const Game = () => {
 
   const getPTwoBoard = () => playerTwoBoard.getTiles();
 
+  const getCurrentTurn = () => currentTurn;
+
   return {
     placeShips,
     playerOneShips,
@@ -92,6 +94,7 @@ const Game = () => {
     move,
     getPOneBoard,
     getPTwoBoard,
+    getCurrentTurn,
   };
 };
 

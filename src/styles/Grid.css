@@ -8,12 +8,12 @@
 
 .friendly {
   background-color: rgb(235, 242, 255);
-  grid-row: 2;
+  grid-row: 3;
 }
 
 .enemy {
   background-color: rgb(255, 234, 234);
-  grid-row: 1;
+  grid-row: 2;
 }
 
 .player1 {

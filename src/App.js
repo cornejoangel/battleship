@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Grid from './components/Grid';
+import TurnIndicator from './components/TurnIndicator';
 import Game from './modules/Game';
 import './styles/normalize.css';
 import './styles/App.css';
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <main>
+      <TurnIndicator player={game.getCurrentTurn()} />
       <Grid player={1} name="enemy" tileSet={playerTwoBoard} attack={attack} />
       <Grid player={1} name="friendly" tileSet={playerOneBoard} />
       <Grid player={2} name="enemy" tileSet={playerOneBoard} attack={attack} />
