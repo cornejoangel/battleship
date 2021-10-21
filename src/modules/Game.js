@@ -74,7 +74,7 @@ const Game = () => {
       return 'player 2 wins';
     }
 
-    if (result !== 'not your turn') {
+    if (result !== 'not your turn' && result !== 'invalid') {
       changeTurn();
     }
 

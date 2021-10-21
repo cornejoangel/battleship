@@ -39,6 +39,11 @@ test('The first player is able to move again', () => {
   expect(thirdMove).toBeDefined();
 });
 
+test('Invalid moves do not take up your turn', () => {
+  expect(game.move(2, { x: 7, y: 7 })).toBe('invalid');
+  expect(game.move(2, { x: 9, y: 9 })).toBe('miss');
+});
+
 test('The game allows no further moves when a player is out of ships', () => {
   // just sinking all of p2's ships
   game.move(2, { x: 1, y: 1 });
