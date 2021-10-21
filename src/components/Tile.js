@@ -9,7 +9,7 @@ const Tile = (props) => {
     tile = (
       <button
         type="button"
-        className={`tile ${type}`}
+        className={`tile enemy-tile ${type}`}
         onClick={(e) => attack(e, player, { x, y })}
       >
         {x}, {y}

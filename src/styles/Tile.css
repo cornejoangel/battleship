@@ -16,9 +16,15 @@
 }
 
 .miss {
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 .hit {
-  background-color: red;
+  background-color: red !important;
+}
+
+.enemy-tile:hover {
+  transform: scale(1.1, 1.1);
+  border: 2px solid crimson;
+  background-color: rgb(255, 178, 178);
 }
