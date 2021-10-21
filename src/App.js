@@ -17,9 +17,17 @@ const App = () => {
     result = game.move(player, coords);
     if (result === 'invalid') {
       alert('invalid move! make another');
-    } else {
-      alert(result);
+      return;
     }
+    alert(result);
+
+    // this block enables random CPU moves
+    let aiResult = '';
+    const aiAttack = game.aiMove();
+    aiResult = game.move(2, aiAttack);
+    alert(`Your opponent strikes ${aiAttack.x}, ${aiAttack.y} - ${aiResult}`);
+    //
+
     setPlayerOneBoard(game.getPOneBoard());
     setPlayerTwoBoard(game.getPTwoBoard());
   };

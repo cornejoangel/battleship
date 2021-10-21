@@ -2,8 +2,7 @@ import Gameboard from './Gameboard';
 import Player from './Player';
 
 const Game = () => {
-  const playerOne = Player();
-  const playerTwo = Player();
+  const ai = Player();
   const playerOneBoard = Gameboard();
   const playerTwoBoard = Gameboard();
   let currentTurn = 1;
@@ -92,6 +91,8 @@ const Game = () => {
     playerTwoBoard.resetTiles();
   };
 
+  const aiMove = () => ai.randomAttack();
+
   return {
     placeShips,
     playerOneShips,
@@ -101,6 +102,7 @@ const Game = () => {
     getPTwoBoard,
     getCurrentTurn,
     reset,
+    aiMove,
   };
 };
 
