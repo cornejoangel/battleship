@@ -12,6 +12,7 @@ const App = () => {
   const [playerOneBoard, setPlayerOneBoard] = useState(game.getPOneBoard());
   const [playerTwoBoard, setPlayerTwoBoard] = useState(game.getPTwoBoard());
   const [placing, setPlacing] = useState(true);
+  const [dummyShip, setDummyShip] = useState(true);
 
   const attack = (e, player, coords) => {
     e.preventDefault();
@@ -37,7 +38,11 @@ const App = () => {
   const moveShip = (e) => {
     e.preventDefault();
     console.log('moving');
-    game.addShip(1, [{ x: 1, y: 1 }]);
+    game.addShip(1, [
+      { x: 1, y: 1 },
+      { x: 2, y: 1 },
+    ]);
+    setDummyShip(false);
     setPlayerOneBoard(game.getPOneBoard());
   };
 
@@ -61,7 +66,7 @@ const App = () => {
   if (placing) {
     screen = (
       <main>
-        <ShipTray moveShip={moveShip} />
+        <ShipTray moveShip={moveShip} dummyShip={dummyShip} />
         <h2 className="friendly-heading">place your ships</h2>
         <Grid player={1} name="friendly" tileSet={playerOneBoard} />
         <ResetButton reset={reset} />

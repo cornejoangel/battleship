@@ -1,19 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ShipTile from './ShipTile';
+// import ShipTile from './ShipTile';
+import Battleship from './Battleship';
 import '../styles/ShipTray.css';
 
 const ShipTray = (props) => {
-  const { moveShip } = props;
-  return (
-    <div className="ship-tray">
-      <ShipTile x={1} y={1} moveShip={moveShip} />
-    </div>
-  );
+  const { moveShip, dummyShip } = props;
+  let tray = null;
+  if (dummyShip) {
+    tray = (
+      <div className="ship-tray">
+        <Battleship moveShip={moveShip} />
+      </div>
+    );
+  } else {
+    tray = <div className="ship-tray">empty</div>;
+  }
+  return tray;
 };
 
 ShipTray.propTypes = {
   moveShip: PropTypes.func,
+  dummyShip: PropTypes.bool,
 };
 
 export default ShipTray;
