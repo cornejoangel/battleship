@@ -8,6 +8,7 @@ test('A game exists', () => {
 
 // this is just for testing and will not be necessary in final version
 test('The game sets up ships for both players', () => {
+  expect(game.playerOneShips()).toBe(0);
   game.placeShips();
   expect(game.playerOneShips()).toBeGreaterThan(0);
   expect(game.playerTwoShips()).toBeGreaterThan(0);
@@ -21,6 +22,22 @@ test('The first player is able to make a move', () => {
 test('The first player is not imediately able to make another move', () => {
   const repeatMove = game.move(1, { x: 9, y: 9 });
   expect(repeatMove).toBe('not your turn');
+});
+
+test('Ships can be manually placed', () => {
+  expect(game.playerOneShips()).toBe(2);
+  game.addShip(1, [
+    { x: 1, y: 1 },
+    { x: 2, y: 1 },
+  ]);
+  expect(game.playerOneShips()).toBe(3);
+  const hitShip = game.move(2, { x: 1, y: 1 });
+  expect(hitShip).toBe('hit');
+  game.move(1, { x: 9, y: 1 });
+  const sunkShip = game.move(2, { x: 2, y: 1 });
+  expect(sunkShip).toBe('sunk');
+  expect(game.playerOneShips()).toBe(2);
+  game.move(1, { x: 9, y: 2 });
 });
 
 test('The second player is able to make a move', () => {

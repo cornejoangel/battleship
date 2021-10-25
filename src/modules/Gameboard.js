@@ -18,7 +18,7 @@ const Gameboard = () => {
       }
       // now check to make sure the new ship will not overlap an existing one
       const duplicate = tiles.find(
-        (tile) => tile.x === coords[i].x || tile.y === coords[i].y
+        (tile) => tile.x === coords[i].x && tile.y === coords[i].y
       );
       if (duplicate) {
         return;

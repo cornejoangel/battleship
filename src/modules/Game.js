@@ -93,8 +93,17 @@ const Game = () => {
 
   const aiMove = () => ai.randomAttack();
 
+  const addShip = (player, coords) => {
+    if (player === 1) {
+      playerOneBoard.addShip(coords);
+    } else if (player === 2) {
+      playerTwoBoard.addShip(coords);
+    }
+  };
+
   return {
     placeShips,
+    addShip,
     playerOneShips,
     playerTwoShips,
     move,

@@ -33,6 +33,13 @@ test('A ship cannot overlap another ship', () => {
   expect(g.shipCount()).toBe(1);
 });
 
+test('Ship overlap check does not produce false positives', () => {
+  expect(g.shipCount()).toBe(1);
+  g.addShip([{ x: 3, y: 1 }]);
+  expect(g.shipCount()).toBe(2);
+  g.receiveAttack({ x: 3, y: 1 });
+});
+
 test('We can have multiple ships of multiple sizes', () => {
   g.addShip([
     { x: 5, y: 4 },

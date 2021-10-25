@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tile from './Tile';
+import ShipTile from './ShipTile';
 import '../styles/ShipTray.css';
 
-const ShipTray = (props) => (
-  <div className="ship-tray">
-    <Tile type="ship" name="" player="1" x="1" y="1" />
-  </div>
-);
+const ShipTray = (props) => {
+  const { moveShip } = props;
+  return (
+    <div className="ship-tray">
+      <ShipTile x={1} y={1} moveShip={moveShip} />
+    </div>
+  );
+};
 
-// ShipTray.propTypes = {
-
-// };
+ShipTray.propTypes = {
+  moveShip: PropTypes.func,
+};
 
 export default ShipTray;

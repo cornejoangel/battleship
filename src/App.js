@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Grid from './components/Grid';
-import TurnIndicator from './components/TurnIndicator';
+// import TurnIndicator from './components/TurnIndicator';
 import ResetButton from './components/ResetButton';
 import ShipTray from './components/ShipTray';
 import Game from './modules/Game';
@@ -34,6 +34,13 @@ const App = () => {
     setPlayerTwoBoard(game.getPTwoBoard());
   };
 
+  const moveShip = (e) => {
+    e.preventDefault();
+    console.log('moving');
+    game.addShip(1, [{ x: 1, y: 1 }]);
+    setPlayerOneBoard(game.getPOneBoard());
+  };
+
   const reset = () => {
     setGame(Game());
     game.reset();
@@ -54,7 +61,7 @@ const App = () => {
   if (placing) {
     screen = (
       <main>
-        <ShipTray />
+        <ShipTray moveShip={moveShip} />
         <h2 className="friendly-heading">place your ships</h2>
         <Grid player={1} name="friendly" tileSet={playerOneBoard} />
         <ResetButton reset={reset} />
