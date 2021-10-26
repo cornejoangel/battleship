@@ -15,6 +15,19 @@ test('A ship can be placed', () => {
   expect(g.shipCount()).toBe(1);
 });
 
+test('A ship can be removed', () => {
+  g.addShip([
+    { x: 9, y: 0 },
+    { x: 9, y: 1 },
+  ]);
+  expect(g.shipCount()).toBe(2);
+  g.removeShip([
+    { x: 9, y: 0 },
+    { x: 9, y: 1 },
+  ]);
+  expect(g.shipCount()).toBe(1);
+});
+
 test('A ship cannot be placed out of bounds', () => {
   expect(g.shipCount()).toBe(1);
   g.addShip([

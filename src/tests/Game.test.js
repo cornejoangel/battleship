@@ -40,6 +40,20 @@ test('Ships can be manually placed', () => {
   game.move(1, { x: 9, y: 2 });
 });
 
+test('Ships can be manually removed', () => {
+  expect(game.playerOneShips()).toBe(2);
+  game.addShip(1, [
+    { x: 9, y: 0 },
+    { x: 9, y: 1 },
+  ]);
+  expect(game.playerOneShips()).toBe(3);
+  game.removeShip(1, [
+    { x: 9, y: 0 },
+    { x: 9, y: 1 },
+  ]);
+  expect(game.playerOneShips()).toBe(2);
+});
+
 test('The second player is able to make a move', () => {
   const secondMove = game.move(2, { x: 7, y: 7 });
   expect(secondMove).toBeDefined();

@@ -101,9 +101,18 @@ const Game = () => {
     }
   };
 
+  const removeShip = (player, coords) => {
+    if (player === 1) {
+      playerOneBoard.removeShip(coords);
+    } else if (player === 2) {
+      playerTwoBoard.removeShip(coords);
+    }
+  };
+
   return {
     placeShips,
     addShip,
+    removeShip,
     playerOneShips,
     playerTwoShips,
     move,

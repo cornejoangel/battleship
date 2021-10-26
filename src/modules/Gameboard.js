@@ -36,6 +36,15 @@ const Gameboard = () => {
     }
   };
 
+  const removeShip = (coords) => {
+    for (let i = 0; i < coords.length; i += 1) {
+      tiles = tiles.filter(
+        (tile) => !(tile.x === coords[i].x && tile.y === coords[i].y)
+      );
+    }
+    ships -= 1;
+  };
+
   const receiveAttack = (coord) => {
     const attack = tiles.find(
       (tile) => tile.x === coord.x && tile.y === coord.y
@@ -74,7 +83,14 @@ const Gameboard = () => {
 
   const resetTiles = () => (tiles = []);
 
-  return { shipCount, addShip, receiveAttack, getTiles, resetTiles };
+  return {
+    shipCount,
+    addShip,
+    removeShip,
+    receiveAttack,
+    getTiles,
+    resetTiles,
+  };
 };
 
 export default Gameboard;
