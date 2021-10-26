@@ -1,0 +1,6 @@
+.battleship {
+  margin-top: 10px;
+  margin-left: 10px;
+  width: fit-content;
+  cursor: move;
+}

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import Grid from './components/Grid';
 // import TurnIndicator from './components/TurnIndicator';
 import ResetButton from './components/ResetButton';
@@ -38,12 +40,12 @@ const App = () => {
   const moveShip = (e) => {
     e.preventDefault();
     console.log('moving');
-    game.addShip(1, [
-      { x: 1, y: 1 },
-      { x: 2, y: 1 },
-    ]);
-    setDummyShip(false);
-    setPlayerOneBoard(game.getPOneBoard());
+    // game.addShip(1, [
+    //   { x: 1, y: 1 },
+    //   { x: 2, y: 1 },
+    // ]);
+    // setDummyShip(false);
+    // setPlayerOneBoard(game.getPOneBoard());
   };
 
   const reset = () => {
@@ -65,12 +67,14 @@ const App = () => {
 
   if (placing) {
     screen = (
-      <main>
-        <ShipTray moveShip={moveShip} dummyShip={dummyShip} />
-        <h2 className="friendly-heading">place your ships</h2>
-        <Grid player={1} name="friendly" tileSet={playerOneBoard} />
-        <ResetButton reset={reset} />
-      </main>
+      <DndProvider backend={HTML5Backend}>
+        <main>
+          <ShipTray moveShip={moveShip} dummyShip={dummyShip} />
+          <h2 className="friendly-heading">place your ships</h2>
+          <Grid player={1} name="friendly" tileSet={playerOneBoard} />
+          <ResetButton reset={reset} />
+        </main>
+      </DndProvider>
     );
   } else {
     screen = (
