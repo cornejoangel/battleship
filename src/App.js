@@ -37,15 +37,20 @@ const App = () => {
     setPlayerTwoBoard(game.getPTwoBoard());
   };
 
-  const moveShip = (e) => {
-    e.preventDefault();
-    console.log('moving');
-    // game.addShip(1, [
-    //   { x: 1, y: 1 },
-    //   { x: 2, y: 1 },
-    // ]);
-    // setDummyShip(false);
-    // setPlayerOneBoard(game.getPOneBoard());
+  const moveShip = (x, y, length, orientation) => {
+    // e.preventDefault();
+    const coords = [];
+    coords.push({ x, y });
+    for (let i = 1; i < length; i += 1) {
+      if (orientation === 'horizontal') {
+        coords.push({ x: x + 1, y });
+      } else {
+        coords.push({ x, y: y + 1 });
+      }
+    }
+    game.addShip(1, coords);
+    setDummyShip(false);
+    setPlayerOneBoard(game.getPOneBoard());
   };
 
   const reset = () => {
@@ -71,7 +76,12 @@ const App = () => {
         <main>
           <ShipTray moveShip={moveShip} dummyShip={dummyShip} />
           <h2 className="friendly-heading">place your ships</h2>
-          <Grid player={1} name="friendly" tileSet={playerOneBoard} />
+          <Grid
+            player={1}
+            name="friendly"
+            tileSet={playerOneBoard}
+            moveShip={moveShip}
+          />
           <ResetButton reset={reset} />
         </main>
       </DndProvider>

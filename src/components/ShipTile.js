@@ -4,14 +4,10 @@ import '../styles/Tile.css';
 import '../styles/ShipTile.css';
 
 const ShipTile = (props) => {
-  const { x, y, moveShip } = props;
+  const { x, y } = props;
   let tile = null;
   tile = (
-    <button
-      type="button"
-      className="tile ship ship-tile"
-      onClick={(e) => moveShip(e)}
-    >
+    <button type="button" className="tile ship ship-tile">
       {x}, {y}
     </button>
   );
@@ -22,7 +18,6 @@ const ShipTile = (props) => {
 ShipTile.propTypes = {
   x: PropTypes.number,
   y: PropTypes.number,
-  moveShip: PropTypes.func,
 };
 
 export default ShipTile;
