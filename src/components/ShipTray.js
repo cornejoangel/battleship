@@ -10,7 +10,13 @@ const ShipTray = (props) => {
   if (dummyShip) {
     tray = (
       <div className="ship-tray">
-        <Battleship moveShip={moveShip} />
+        <Battleship
+          moveShip={moveShip}
+          coords={[
+            { x: 0, y: 0 },
+            { x: 1, y: 0 },
+          ]}
+        />
       </div>
     );
   } else {

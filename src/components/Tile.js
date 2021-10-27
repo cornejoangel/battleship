@@ -35,6 +35,10 @@ const Tile = (props) => {
         type="button"
         className={`tile ${type}`}
         ref={drop}
+        style={{
+          gridColumn: x + 1,
+          gridRow: y + 1,
+        }}
         // onClick={(e) => moveShip(e, x, y, 2, 'horizontal')}
       >
         {x}, {y}

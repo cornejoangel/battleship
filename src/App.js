@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Grid from './components/Grid';
+import PlacementGrid from './components/PlacementGrid';
 // import TurnIndicator from './components/TurnIndicator';
 import ResetButton from './components/ResetButton';
 import ShipTray from './components/ShipTray';
@@ -15,6 +16,7 @@ const App = () => {
   const [playerTwoBoard, setPlayerTwoBoard] = useState(game.getPTwoBoard());
   const [placing, setPlacing] = useState(true);
   const [dummyShip, setDummyShip] = useState(true);
+  const [battleships, setBattleships] = useState([]);
 
   const attack = (e, player, coords) => {
     e.preventDefault();
@@ -43,12 +45,16 @@ const App = () => {
     coords.push({ x, y });
     for (let i = 1; i < length; i += 1) {
       if (orientation === 'horizontal') {
-        coords.push({ x: x + 1, y });
+        coords.push({ x: x + i, y });
       } else {
-        coords.push({ x, y: y + 1 });
+        coords.push({ x, y: y + i });
       }
     }
-    game.addShip(1, coords);
+    const ar = [];
+    ar.push(coords);
+    console.log(ar);
+    setBattleships(battleships.concat(ar));
+    // game.addShip(1, coords);
     setDummyShip(false);
     setPlayerOneBoard(game.getPOneBoard());
   };
@@ -76,12 +82,13 @@ const App = () => {
         <main>
           <ShipTray moveShip={moveShip} dummyShip={dummyShip} />
           <h2 className="friendly-heading">place your ships</h2>
-          <Grid
+          {/* <Grid
             player={1}
             name="friendly"
             tileSet={playerOneBoard}
             moveShip={moveShip}
-          />
+          /> */}
+          <PlacementGrid moveShip={moveShip} battleships={battleships} />
           <ResetButton reset={reset} />
         </main>
       </DndProvider>
