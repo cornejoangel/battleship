@@ -10,7 +10,7 @@ const Tile = (props) => {
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept: ItemTypes.SHIP,
-      drop: () => moveShip(x, y, 2, 'horizontal'),
+      drop: (item) => moveShip(x, y, item),
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
       }),
@@ -39,7 +39,6 @@ const Tile = (props) => {
           gridColumn: x + 1,
           gridRow: y + 1,
         }}
-        // onClick={(e) => moveShip(e, x, y, 2, 'horizontal')}
       >
         {x}, {y}
       </button>

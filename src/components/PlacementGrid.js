@@ -5,7 +5,7 @@ import Battleship from './Battleship';
 import '../styles/Grid.css';
 
 const PlacementGrid = (props) => {
-  const { moveShip, battleships } = props;
+  const { moveShip, gridShips } = props;
 
   let tiles = [];
   for (let i = 0; i < 10; i += 1) {
@@ -29,10 +29,13 @@ const PlacementGrid = (props) => {
           moveShip={moveShip}
         />
       ))}
-      {battleships.map((ship) => (
+      {gridShips.map((ship) => (
         <Battleship
           moveShip={moveShip}
-          coords={ship}
+          x={ship.x}
+          y={ship.y}
+          length={ship.length}
+          orientation={ship.orientation}
           key={`${ship.x}${ship.y}`}
         />
       ))}
@@ -44,7 +47,7 @@ const PlacementGrid = (props) => {
 
 PlacementGrid.propTypes = {
   moveShip: PropTypes.func,
-  battleships: PropTypes.array,
+  gridShips: PropTypes.array,
 };
 
 export default PlacementGrid;

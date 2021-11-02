@@ -15,8 +15,10 @@ const App = () => {
   const [playerOneBoard, setPlayerOneBoard] = useState(game.getPOneBoard());
   const [playerTwoBoard, setPlayerTwoBoard] = useState(game.getPTwoBoard());
   const [placing, setPlacing] = useState(true);
-  const [dummyShip, setDummyShip] = useState(true);
-  const [battleships, setBattleships] = useState([]);
+  const [trayShips, setTrayShips] = useState([
+    { x: -1, y: -1, length: 2, orientation: 'horizontal' },
+  ]);
+  const [gridShips, setGridShips] = useState([]);
 
   const attack = (e, player, coords) => {
     e.preventDefault();
@@ -39,23 +41,10 @@ const App = () => {
     setPlayerTwoBoard(game.getPTwoBoard());
   };
 
-  const moveShip = (x, y, length, orientation) => {
-    // e.preventDefault();
-    const coords = [];
-    coords.push({ x, y });
-    for (let i = 1; i < length; i += 1) {
-      if (orientation === 'horizontal') {
-        coords.push({ x: x + i, y });
-      } else {
-        coords.push({ x, y: y + i });
-      }
-    }
-    const ar = [];
-    ar.push(coords);
-    console.log(ar);
-    setBattleships(battleships.concat(ar));
-    // game.addShip(1, coords);
-    setDummyShip(false);
+  const moveShip = (x, y, item) => {
+    const { length, orientation } = item;
+    const temp = { x, y, length, orientation };
+    setGridShips(gridShips.concat(temp));
     setPlayerOneBoard(game.getPOneBoard());
   };
 
@@ -80,7 +69,7 @@ const App = () => {
     screen = (
       <DndProvider backend={HTML5Backend}>
         <main>
-          <ShipTray moveShip={moveShip} dummyShip={dummyShip} />
+          <ShipTray moveShip={moveShip} trayShips={trayShips} />
           <h2 className="friendly-heading">place your ships</h2>
           {/* <Grid
             player={1}
@@ -88,7 +77,7 @@ const App = () => {
             tileSet={playerOneBoard}
             moveShip={moveShip}
           /> */}
-          <PlacementGrid moveShip={moveShip} battleships={battleships} />
+          <PlacementGrid moveShip={moveShip} gridShips={gridShips} />
           <ResetButton reset={reset} />
         </main>
       </DndProvider>
