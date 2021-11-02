@@ -16,7 +16,7 @@ const App = () => {
   const [playerTwoBoard, setPlayerTwoBoard] = useState(game.getPTwoBoard());
   const [placing, setPlacing] = useState(true);
   const [trayShips, setTrayShips] = useState([
-    { x: -1, y: -1, length: 2, orientation: 'horizontal' },
+    { x: -1, y: -1, length: 2, orientation: 'horizontal', model: 'destroyer' },
   ]);
   const [gridShips, setGridShips] = useState([]);
 
@@ -42,8 +42,9 @@ const App = () => {
   };
 
   const moveShip = (x, y, item) => {
-    const { length, orientation } = item;
-    const temp = { x, y, length, orientation };
+    const { length, orientation, model } = item;
+    const temp = { x, y, length, orientation, model };
+    setTrayShips(trayShips.filter((ship) => ship.model !== model));
     setGridShips(gridShips.concat(temp));
     setPlayerOneBoard(game.getPOneBoard());
   };

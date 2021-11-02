@@ -6,12 +6,13 @@ import ShipTile from './ShipTile';
 import '../styles/Battleship.css';
 
 const Battleship = (props) => {
-  const { moveShip, x, y, length, orientation } = props;
+  const { moveShip, x, y, length, orientation, model } = props;
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.SHIP,
     item: {
       length,
       orientation,
+      model,
     },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
@@ -63,6 +64,7 @@ Battleship.propTypes = {
   y: PropTypes.number,
   length: PropTypes.number,
   orientation: PropTypes.string,
+  model: PropTypes.string,
 };
 
 export default Battleship;

@@ -16,6 +16,7 @@ const ShipTray = (props) => {
           y={ship.y}
           length={ship.length}
           orientation={ship.orientation}
+          model={ship.model}
           key={`${ship.x}${ship.y}`}
         />
       ))}
