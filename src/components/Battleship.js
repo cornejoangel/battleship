@@ -41,19 +41,35 @@ const Battleship = (props) => {
   }
 
   let ship = null;
-  ship = (
-    <div
-      className="battleship"
-      ref={drag}
-      style={{
-        gridColumnStart: x + 1,
-        gridColumnEnd: x + 3,
-        gridRowStart: y + 1,
-      }}
-    >
-      {shipTiles}
-    </div>
-  );
+  if (orientation === 'horizontal') {
+    ship = (
+      <div
+        className="battleship horizontal"
+        ref={drag}
+        style={{
+          gridColumnStart: x + 1,
+          gridColumnEnd: x + 1 + length,
+          gridRowStart: y + 1,
+        }}
+      >
+        {shipTiles}
+      </div>
+    );
+  } else {
+    ship = (
+      <div
+        className="battleship vertical"
+        ref={drag}
+        style={{
+          gridColumnStart: x + 1,
+          gridRowStart: y + 1,
+          gridRowEnd: y + 1 + length,
+        }}
+      >
+        {shipTiles}
+      </div>
+    );
+  }
 
   return ship;
 };

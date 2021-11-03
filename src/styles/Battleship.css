@@ -3,5 +3,12 @@
   cursor: move;
   z-index: 1;
   display: flex;
+}
+
+.horizontal {
   flex-direction: row;
+}
+
+.vertical {
+  flex-direction: column;
 }
