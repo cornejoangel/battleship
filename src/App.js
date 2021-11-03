@@ -7,6 +7,7 @@ import PlacementGrid from './components/PlacementGrid';
 import ResetButton from './components/ResetButton';
 import ShipTray from './components/ShipTray';
 import Game from './modules/Game';
+import SetupShips from './modules/SetupShips';
 import './styles/normalize.css';
 import './styles/App.css';
 
@@ -15,9 +16,7 @@ const App = () => {
   const [playerOneBoard, setPlayerOneBoard] = useState(game.getPOneBoard());
   const [playerTwoBoard, setPlayerTwoBoard] = useState(game.getPTwoBoard());
   const [placing, setPlacing] = useState(true);
-  const [trayShips, setTrayShips] = useState([
-    { x: -1, y: -1, length: 2, orientation: 'horizontal', model: 'destroyer' },
-  ]);
+  const [trayShips, setTrayShips] = useState(SetupShips());
   const [gridShips, setGridShips] = useState([]);
 
   const attack = (e, player, coords) => {
@@ -44,8 +43,16 @@ const App = () => {
   const moveShip = (x, y, item) => {
     const { length, orientation, model } = item;
     const temp = { x, y, length, orientation, model };
-    setTrayShips(trayShips.filter((ship) => ship.model !== model));
-    setGridShips(gridShips.concat(temp));
+    // remove this ship from the tray now that it is going in the grid
+    setTrayShips((prevShips) =>
+      prevShips.filter((ship) => ship.model !== model)
+    );
+    // remove this ship from the grid if it is already here
+    // then add it in its new location
+    setGridShips((prevShips) =>
+      prevShips.filter((s) => s.model !== temp.model)
+    );
+    setGridShips((prevShips) => prevShips.concat(temp));
     setPlayerOneBoard(game.getPOneBoard());
   };
 
