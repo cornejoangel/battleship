@@ -6,7 +6,7 @@ import ShipTile from './ShipTile';
 import '../styles/Battleship.css';
 
 const Battleship = (props) => {
-  const { moveShip, x, y, length, orientation, model } = props;
+  const { moveShip, rotateShip, x, y, length, orientation, model } = props;
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.SHIP,
     item: {
@@ -21,7 +21,16 @@ const Battleship = (props) => {
 
   const shipTiles = [];
   const shipCoords = {};
-  shipTiles.push(<ShipTile x={x} y={y} moveShip={moveShip} key={`${x}${y}`} />);
+  shipTiles.push(
+    <ShipTile
+      x={x}
+      y={y}
+      moveShip={moveShip}
+      rotateShip={rotateShip}
+      model={model}
+      key={`${x}${y}`}
+    />
+  );
   for (let i = 1; i < length; i += 1) {
     if (orientation === 'horizontal') {
       shipCoords.x = x + i;
@@ -35,6 +44,8 @@ const Battleship = (props) => {
         x={shipCoords.x}
         y={shipCoords.y}
         moveShip={moveShip}
+        rotateShip={rotateShip}
+        model={model}
         key={`${shipCoords.x}${shipCoords.y}`}
       />
     );
@@ -76,6 +87,7 @@ const Battleship = (props) => {
 
 Battleship.propTypes = {
   moveShip: PropTypes.func,
+  rotateShip: PropTypes.func,
   x: PropTypes.number,
   y: PropTypes.number,
   length: PropTypes.number,

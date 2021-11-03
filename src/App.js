@@ -56,6 +56,35 @@ const App = () => {
     setPlayerOneBoard(game.getPOneBoard());
   };
 
+  /*
+  look for the ship in gridShips and trayShips
+  change its orientation wherever you find it
+  update both states
+  */
+  const rotateShip = (e, model) => {
+    e.preventDefault();
+    const tempTray = trayShips.map((s) => {
+      if (s.model === model && s.orientation === 'horizontal') {
+        s.orientation = 'vertical';
+      } else if (s.model === model && s.orientation === 'vertical') {
+        s.orientation = 'horizontal';
+      }
+      return s;
+    });
+
+    const tempGrid = gridShips.map((s) => {
+      if (s.model === model && s.orientation === 'horizontal') {
+        s.orientation = 'vertical';
+      } else if (s.model === model && s.orientation === 'vertical') {
+        s.orientation = 'horizontal';
+      }
+      return s;
+    });
+
+    setTrayShips(tempTray);
+    setGridShips(tempGrid);
+  };
+
   const reset = () => {
     setGame(Game());
     game.reset();
@@ -77,7 +106,11 @@ const App = () => {
     screen = (
       <DndProvider backend={HTML5Backend}>
         <main>
-          <ShipTray moveShip={moveShip} trayShips={trayShips} />
+          <ShipTray
+            moveShip={moveShip}
+            rotateShip={rotateShip}
+            trayShips={trayShips}
+          />
           <h2 className="friendly-heading">place your ships</h2>
           {/* <Grid
             player={1}
@@ -85,7 +118,11 @@ const App = () => {
             tileSet={playerOneBoard}
             moveShip={moveShip}
           /> */}
-          <PlacementGrid moveShip={moveShip} gridShips={gridShips} />
+          <PlacementGrid
+            moveShip={moveShip}
+            rotateShip={rotateShip}
+            gridShips={gridShips}
+          />
           <ResetButton reset={reset} />
         </main>
       </DndProvider>

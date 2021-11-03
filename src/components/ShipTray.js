@@ -5,13 +5,14 @@ import Battleship from './Battleship';
 import '../styles/ShipTray.css';
 
 const ShipTray = (props) => {
-  const { moveShip, trayShips } = props;
+  const { moveShip, rotateShip, trayShips } = props;
   let tray = null;
   tray = (
     <div className="ship-tray">
       {trayShips.map((ship) => (
         <Battleship
           moveShip={moveShip}
+          rotateShip={rotateShip}
           x={ship.x}
           y={ship.y}
           length={ship.length}
@@ -27,6 +28,7 @@ const ShipTray = (props) => {
 
 ShipTray.propTypes = {
   moveShip: PropTypes.func,
+  rotateShip: PropTypes.func,
   trayShips: PropTypes.array,
 };
 
