@@ -11,7 +11,6 @@ const Battleship = (props) => {
     type: ItemTypes.SHIP,
     item: {
       length,
-      orientation,
       model,
     },
     collect: (monitor) => ({

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Grid from './components/Grid';
@@ -18,6 +18,10 @@ const App = () => {
   const [placing, setPlacing] = useState(true);
   const [trayShips, setTrayShips] = useState(SetupShips());
   const [gridShips, setGridShips] = useState([]);
+  const trayRef = useRef();
+  const gridRef = useRef();
+  trayRef.current = trayShips;
+  gridRef.current = gridShips;
 
   const attack = (e, player, coords) => {
     e.preventDefault();
@@ -41,8 +45,20 @@ const App = () => {
   };
 
   const moveShip = (x, y, item) => {
-    const { length, orientation, model } = item;
-    const temp = { x, y, length, orientation, model };
+    const { length, model } = item;
+    const temp = { x, y, length, model };
+
+    // the ship must be either in the grid or the tray
+    // we must find it so we can know its current orientation
+    // this allows the ship to maintain its current orientation as it is placed
+    const inGrid = gridRef.current.find((s) => s.model === model);
+    const inTray = trayRef.current.find((s) => s.model === model);
+    if (!!inGrid === true && !!inTray === false) {
+      temp.orientation = inGrid.orientation;
+    } else if (!!inGrid === false && !!inTray === true) {
+      temp.orientation = inTray.orientation;
+    }
+
     // remove this ship from the tray now that it is going in the grid
     setTrayShips((prevShips) =>
       prevShips.filter((ship) => ship.model !== model)
