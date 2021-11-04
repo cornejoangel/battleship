@@ -7,6 +7,7 @@ import '../styles/ShipTray.css';
 const ShipTray = (props) => {
   const { moveShip, rotateShip, trayShips } = props;
   let tray = null;
+  const inTray = true;
   tray = (
     <div className="ship-tray">
       {trayShips.map((ship) => (
@@ -19,6 +20,7 @@ const ShipTray = (props) => {
           orientation={ship.orientation}
           model={ship.model}
           key={ship.model}
+          inTray={inTray}
         />
       ))}
     </div>

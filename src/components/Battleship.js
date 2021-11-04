@@ -6,7 +6,8 @@ import ShipTile from './ShipTile';
 import '../styles/Battleship.css';
 
 const Battleship = (props) => {
-  const { moveShip, rotateShip, x, y, length, orientation, model } = props;
+  const { moveShip, rotateShip, x, y, length, orientation, model, inTray } =
+    props;
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.SHIP,
     item: {
@@ -54,7 +55,9 @@ const Battleship = (props) => {
   if (orientation === 'horizontal') {
     ship = (
       <div
-        className="battleship horizontal"
+        className={
+          inTray ? `battleship horizontal ${model}` : 'battleship horizontal'
+        }
         ref={drag}
         style={{
           gridColumnStart: x + 1,
@@ -68,7 +71,9 @@ const Battleship = (props) => {
   } else {
     ship = (
       <div
-        className="battleship vertical"
+        className={
+          inTray ? `battleship vertical ${model}` : 'battleship vertical'
+        }
         ref={drag}
         style={{
           gridColumnStart: x + 1,
@@ -92,6 +97,7 @@ Battleship.propTypes = {
   length: PropTypes.number,
   orientation: PropTypes.string,
   model: PropTypes.string,
+  inTray: PropTypes.bool,
 };
 
 export default Battleship;
