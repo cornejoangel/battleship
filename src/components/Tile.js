@@ -11,7 +11,7 @@ const Tile = (props) => {
     () => ({
       accept: ItemTypes.SHIP,
       drop: (item) => moveShip(x, y, item),
-      canDrop: () => canDropShip(),
+      canDrop: (item) => canDropShip(x, y, item),
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
       }),

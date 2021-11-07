@@ -51,13 +51,19 @@ const Battleship = (props) => {
     );
   }
 
+  /*
+  The addition of the dragging class (sets negative z-index) allows the user to 
+  drag the ship onto a location that was previously held by the ship, otherwise 
+  the same ship would be interpreted as the drop target and since ships are not 
+  droppable the drop would be rejected
+  */
   let ship = null;
   if (orientation === 'horizontal') {
     ship = (
       <div
-        className={
-          inTray ? `battleship horizontal ${model}` : 'battleship horizontal'
-        }
+        className={`battleship horizontal ${inTray ? `${model}` : ''} ${
+          isDragging ? 'dragging' : ''
+        }`}
         ref={drag}
         style={{
           gridColumnStart: x + 1,
@@ -71,9 +77,9 @@ const Battleship = (props) => {
   } else {
     ship = (
       <div
-        className={
-          inTray ? `battleship vertical ${model}` : 'battleship vertical'
-        }
+        className={`battleship vertical ${inTray ? `${model}` : ''} ${
+          isDragging ? 'dragging' : ''
+        }`}
         ref={drag}
         style={{
           gridColumnStart: x + 1,

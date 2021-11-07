@@ -46,3 +46,7 @@
   justify-self: center;
   align-self: center;
 }
+
+.dragging {
+  z-index: -1;
+}

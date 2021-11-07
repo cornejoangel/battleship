@@ -63,30 +63,42 @@ const App = () => {
   };
 
   /*
-  enumerate the possible cases of checking ship placement validity:
-  - 1. i am placing a ship from the tray
-  - 2. i am moving a ship within the grid
-    - 2(a) the ship successfuly moves
-    - 2(b) the ship does not move
-  - 3. i am rotating a ship within the grid
-    - 3(a) the ship successfully rotates
-    - 3(b) the ship does not rotate
+  the ship must be either in the grid or the tray
+  we must find it so we can know its current orientation
   */
+  const getOrientation = (model) => {
+    const inGrid = gridRef.current.find((s) => s.model === model);
+    const inTray = trayRef.current.find((s) => s.model === model);
+    if (!!inGrid === true && !!inTray === false) {
+      return inGrid.orientation;
+    }
+    if (!!inGrid === false && !!inTray === true) {
+      return inTray.orientation;
+    }
+  };
+
+  /*
+  identical to the above function but returns a built ship instead
+  not DRY but i prefer doing this over making one overly if/else-y function
+  if this becomes a problem i can still do that without much trouble at this scale
+  */
+  const getShipByModel = (model) => {
+    const inGrid = gridRef.current.find((s) => s.model === model);
+    const inTray = trayRef.current.find((s) => s.model === model);
+    if (!!inGrid === true && !!inTray === false) {
+      return buildShip(inGrid);
+    }
+    if (!!inGrid === false && !!inTray === true) {
+      return buildShip(inTray);
+    }
+  };
 
   const moveShip = (x, y, item) => {
     const { length, model } = item;
     const temp = { x, y, length, model };
 
-    // the ship must be either in the grid or the tray
-    // we must find it so we can know its current orientation
-    // this allows the ship to maintain its current orientation as it is placed
-    const inGrid = gridRef.current.find((s) => s.model === model);
-    const inTray = trayRef.current.find((s) => s.model === model);
-    if (!!inGrid === true && !!inTray === false) {
-      temp.orientation = inGrid.orientation;
-    } else if (!!inGrid === false && !!inTray === true) {
-      temp.orientation = inTray.orientation;
-    }
+    // find the current orientation so we can know how we should place it
+    temp.orientation = getOrientation(model);
 
     // remove this ship from the tray now that it is going in the grid
     setTrayShips((prevShips) =>
@@ -98,13 +110,12 @@ const App = () => {
       prevShips.filter((s) => s.model !== temp.model)
     );
     setGridShips((prevShips) => prevShips.concat(temp));
+    // keep track of all the tiles this ship occupies
     const tempShip = buildShip(temp);
-    // console.log(tempShip);
     if (game.checkLocation(1, tempShip) === true) {
       game.removeShipModel(1, temp.model);
       game.addShip(1, tempShip, temp.model);
     }
-    // console.log(game.getPOneBoard());
     setPlayerOneBoard(game.getPOneBoard());
   };
 
@@ -162,9 +173,26 @@ const App = () => {
     setGridShips(tempGrid);
   };
 
-  const canDropShip = () => {
-    const hey = 'h';
-    return true;
+  /*
+  Ships cannot overlap!
+  */
+  const canDropShip = (x, y, item) => {
+    const { length, model } = item;
+    const temp = { x, y, length, model };
+    temp.orientation = getOrientation(model);
+    const potentialShip = buildShip(temp);
+    const originalShip = getShipByModel(model);
+    /*
+    have to remove the ship from the set of occupied tiles before checking for 
+    placement validity or else we might be rejected because the spot we are 
+    moving to was occupied by this same ship before
+    also have to re-add the ship or else attempting to make an invalid drop with 
+    a ship will allow other ships to be placed over it
+    */
+    game.removeShipModel(1, temp.model);
+    const result = game.checkLocation(1, potentialShip);
+    game.addShip(1, originalShip, model);
+    return result;
   };
 
   const reset = () => {
