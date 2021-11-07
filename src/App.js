@@ -131,7 +131,10 @@ const App = () => {
 
     // find the ship we are going to rotate and preserve its location/orientation
     const tempGrid = gridShips;
-    const tempShip = tempGrid.find((s) => s.model === model);
+    let tempShip = tempGrid.find((s) => s.model === model);
+    if (!tempShip) {
+      tempShip = tempTray.find((s) => s.model === model);
+    }
     // we will need these later if the rotation ends up being rejected
     const originalOrientation = tempShip.orientation;
     const originalShip = buildShip(tempShip);
