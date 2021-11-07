@@ -54,6 +54,36 @@ test('Ships can be manually removed', () => {
   expect(game.playerOneShips()).toBe(2);
 });
 
+test('A ship can be added with a model, and removed by giving only the model', () => {
+  expect(game.playerOneShips()).toBe(2);
+  game.addShip(
+    1,
+    [
+      { x: 9, y: 0 },
+      { x: 9, y: 1 },
+    ],
+    'patrol'
+  );
+  expect(game.playerOneShips()).toBe(3);
+  game.removeShipModel(1, 'patrol');
+  expect(game.playerOneShips()).toBe(2);
+});
+
+test('A location can be checked for placement validity without adding a ship', () => {
+  expect(game.playerOneShips()).toBe(2);
+  const res = game.checkLocation(1, [
+    { x: 9, y: 0 },
+    { x: 9, y: 1 },
+  ]);
+  expect(res).toBe(true);
+  const res2 = game.checkLocation(1, [
+    { x: 10, y: 4 },
+    { x: 9, y: 4 },
+  ]);
+  expect(res2).toBe(false);
+  expect(game.playerOneShips()).toBe(2);
+});
+
 test('The second player is able to make a move', () => {
   const secondMove = game.move(2, { x: 7, y: 7 });
   expect(secondMove).toBeDefined();

@@ -5,12 +5,13 @@ import { ItemTypes } from '../modules/Constants';
 import '../styles/Tile.css';
 
 const Tile = (props) => {
-  const { type, x, y, name, player, attack, moveShip } = props;
+  const { type, x, y, name, player, attack, moveShip, canDropShip } = props;
 
   const [{ isOver }, drop] = useDrop(
     () => ({
       accept: ItemTypes.SHIP,
       drop: (item) => moveShip(x, y, item),
+      canDrop: () => canDropShip(),
       collect: (monitor) => ({
         isOver: !!monitor.isOver(),
       }),
@@ -56,6 +57,7 @@ Tile.propTypes = {
   player: PropTypes.number,
   attack: PropTypes.func,
   moveShip: PropTypes.func,
+  canDropShip: PropTypes.func,
 };
 
 export default Tile;

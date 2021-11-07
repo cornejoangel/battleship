@@ -44,6 +44,35 @@ const App = () => {
     setPlayerTwoBoard(game.getPTwoBoard());
   };
 
+  const buildShip = (shipData) => {
+    const { x, y, length, orientation } = shipData;
+    const ship = [];
+    let tempX = 0;
+    let tempY = 0;
+    for (let i = 0; i < length; i += 1) {
+      if (orientation === 'horizontal') {
+        tempX = x + i;
+        tempY = y;
+      } else {
+        tempX = x;
+        tempY = y + i;
+      }
+      ship.push({ x: tempX, y: tempY });
+    }
+    return ship;
+  };
+
+  /*
+  enumerate the possible cases of checking ship placement validity:
+  - 1. i am placing a ship from the tray
+  - 2. i am moving a ship within the grid
+    - 2(a) the ship successfuly moves
+    - 2(b) the ship does not move
+  - 3. i am rotating a ship within the grid
+    - 3(a) the ship successfully rotates
+    - 3(b) the ship does not rotate
+  */
+
   const moveShip = (x, y, item) => {
     const { length, model } = item;
     const temp = { x, y, length, model };
@@ -69,6 +98,13 @@ const App = () => {
       prevShips.filter((s) => s.model !== temp.model)
     );
     setGridShips((prevShips) => prevShips.concat(temp));
+    const tempShip = buildShip(temp);
+    // console.log(tempShip);
+    if (game.checkLocation(1, tempShip) === true) {
+      game.removeShipModel(1, temp.model);
+      game.addShip(1, tempShip, temp.model);
+    }
+    // console.log(game.getPOneBoard());
     setPlayerOneBoard(game.getPOneBoard());
   };
 
@@ -88,17 +124,44 @@ const App = () => {
       return s;
     });
 
-    const tempGrid = gridShips.map((s) => {
-      if (s.model === model && s.orientation === 'horizontal') {
-        s.orientation = 'vertical';
-      } else if (s.model === model && s.orientation === 'vertical') {
-        s.orientation = 'horizontal';
-      }
-      return s;
-    });
+    /*
+    Ships that are already in the grid need to check if their rotation is valid
+    This necessitates a bit more logic
+    */
+
+    // find the ship we are going to rotate and preserve its location/orientation
+    const tempGrid = gridShips;
+    const tempShip = tempGrid.find((s) => s.model === model);
+    // we will need these later if the rotation ends up being rejected
+    const originalOrientation = tempShip.orientation;
+    const originalShip = buildShip(tempShip);
+
+    // lets see what this rotation would look like so we can check its validity
+    if (tempShip.orientation === 'horizontal') {
+      tempShip.orientation = 'vertical';
+    } else if (tempShip.orientation === 'vertical') {
+      tempShip.orientation = 'horizontal';
+    }
+    const potentialRotation = buildShip(tempShip);
+
+    // remove the ship (otherwise the rotation will be rejected for overlap)
+    game.removeShipModel(1, model);
+    if (game.checkLocation(1, potentialRotation) === true) {
+      // potential rotation accepted, add the ship
+      game.addShip(1, potentialRotation, model);
+    } else {
+      // rotation rejected - return the orientation to what it started as and re-add
+      tempShip.orientation = originalOrientation;
+      game.addShip(1, originalShip, model);
+    }
 
     setTrayShips(tempTray);
     setGridShips(tempGrid);
+  };
+
+  const canDropShip = () => {
+    const hey = 'h';
+    return true;
   };
 
   const reset = () => {
@@ -138,6 +201,7 @@ const App = () => {
             moveShip={moveShip}
             rotateShip={rotateShip}
             gridShips={gridShips}
+            canDropShip={canDropShip}
           />
           <ResetButton reset={reset} />
         </main>

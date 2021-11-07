@@ -93,12 +93,14 @@ const Game = () => {
 
   const aiMove = () => ai.randomAttack();
 
-  const addShip = (player, coords) => {
+  const addShip = (player, coords, model = '') => {
+    let result = null;
     if (player === 1) {
-      playerOneBoard.addShip(coords);
+      result = playerOneBoard.addShip(coords, model);
     } else if (player === 2) {
-      playerTwoBoard.addShip(coords);
+      result = playerTwoBoard.addShip(coords, model);
     }
+    return result;
   };
 
   const removeShip = (player, coords) => {
@@ -109,10 +111,29 @@ const Game = () => {
     }
   };
 
+  const removeShipModel = (player, model) => {
+    if (player === 1) {
+      playerOneBoard.removeModel(model);
+    } else if (player === 2) {
+      playerTwoBoard.removeModel(model);
+    }
+  };
+
+  const checkLocation = (player, coords) => {
+    if (player === 1) {
+      return playerOneBoard.checkShipLocation(coords);
+    }
+    if (player === 2) {
+      return playerTwoBoard.checkShipLocation(coords);
+    }
+  };
+
   return {
     placeShips,
     addShip,
     removeShip,
+    removeShipModel,
+    checkLocation,
     playerOneShips,
     playerTwoShips,
     move,

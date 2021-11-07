@@ -28,6 +28,44 @@ test('A ship can be removed', () => {
   expect(g.shipCount()).toBe(1);
 });
 
+test('A ship can be added with a specified model type', () => {
+  g.addShip(
+    [
+      { x: 9, y: 0 },
+      { x: 9, y: 1 },
+    ],
+    'patrol'
+  );
+  expect(g.shipCount()).toBe(2);
+  g.removeShip([
+    { x: 9, y: 0 },
+    { x: 9, y: 1 },
+  ]);
+  expect(g.shipCount()).toBe(1);
+});
+
+test('A ship can be removed based only on its model type', () => {
+  g.addShip(
+    [
+      { x: 9, y: 0 },
+      { x: 9, y: 1 },
+    ],
+    'patrol'
+  );
+  expect(g.shipCount()).toBe(2);
+  g.removeModel('patrol');
+  expect(g.shipCount()).toBe(1);
+});
+
+test('Ship placement can be tested without actually trying to add a ship', () => {
+  expect(g.shipCount()).toBe(1);
+  g.checkShipLocation([
+    { x: 9, y: 0 },
+    { x: 9, y: 1 },
+  ]);
+  expect(g.shipCount()).toBe(1);
+});
+
 test('A ship cannot be placed out of bounds', () => {
   expect(g.shipCount()).toBe(1);
   g.addShip([
