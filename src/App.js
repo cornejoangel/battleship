@@ -219,6 +219,7 @@ const App = () => {
   /*
   Called by randomShips to get the locations to move things to but extracted
   into its own function so it can also be called to randomly place the AI's ships
+  Returns the data (not all the coordinates) of the ships that were generated
 
   clear the player's game board
   for each ship, randomize its orientation and x, y
@@ -240,6 +241,7 @@ const App = () => {
       { length: 4, model: 'battler' },
       { length: 5, model: 'carrier' },
     ];
+    const addedShips = [];
     for (let i = 0; i < ships.length; i += 1) {
       let notAdded = true;
       do {
@@ -255,17 +257,19 @@ const App = () => {
         // it it succeeds notAdded is set to true so we reverse it and don't loop again
         notAdded = !game.addShip(player, tempShip, ships[i].model);
       } while (notAdded);
+      addedShips.push(ships[i]);
     }
+    return addedShips;
   };
 
   /*
-  Remove every ship from the grid and the tray
-  Generate random locations for each ship
-  Move the battleships to their newly assigned coordinates
+  Assigns random locations for each ship, clears the tray and moves the ships
+  to their assigned locations
   */
   const randomShips = () => {
-    setRandomShipLocations(1);
-    console.log(game.getPOneBoard());
+    const randomizedShips = setRandomShipLocations(1);
+    setTrayShips([]);
+    setGridShips(randomizedShips);
   };
 
   // if (game.playerOneShips() === 0 && game.playerTwoShips() === 0) {
