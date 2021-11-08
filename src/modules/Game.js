@@ -91,6 +91,14 @@ const Game = () => {
     playerTwoBoard.resetTiles();
   };
 
+  const resetPOne = () => {
+    playerOneBoard.resetTiles();
+  };
+
+  const resetPTwo = () => {
+    playerTwoBoard.resetTiles();
+  };
+
   const aiMove = () => ai.randomAttack();
 
   const addShip = (player, coords, model = '') => {
@@ -141,6 +149,8 @@ const Game = () => {
     getPTwoBoard,
     getCurrentTurn,
     reset,
+    resetPOne,
+    resetPTwo,
     aiMove,
   };
 };

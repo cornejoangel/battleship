@@ -5,6 +5,7 @@ import Grid from './components/Grid';
 import PlacementGrid from './components/PlacementGrid';
 // import TurnIndicator from './components/TurnIndicator';
 import ResetButton from './components/ResetButton';
+import RandomButtom from './components/RandomButton';
 import ShipTray from './components/ShipTray';
 import Game from './modules/Game';
 import SetupShips from './modules/SetupShips';
@@ -204,6 +205,69 @@ const App = () => {
     setPlacing(true);
   };
 
+  /*
+  This is literally just Player.randomAttack()
+  I should ideally refactor everything to remove the need for players and just
+  use this function instead
+  */
+  const getRandomCoordinates = () => {
+    const x = Math.floor(Math.random() * 10);
+    const y = Math.floor(Math.random() * 10);
+    return { x, y };
+  };
+
+  /*
+  Called by randomShips to get the locations to move things to but extracted
+  into its own function so it can also be called to randomly place the AI's ships
+
+  clear the player's game board
+  for each ship, randomize its orientation and x, y
+  try to add the ship to the appropriate player's board
+  if you get a failed message generate a new orientation and x, y
+  */
+  const setRandomShipLocations = (player) => {
+    if (player === 1) {
+      game.resetPOne();
+    } else if (player === 2) {
+      game.resetPTwo();
+    }
+    // set the basic data for the ships that will not change
+    const orientations = ['horizontal', 'vertical'];
+    const ships = [
+      { length: 2, model: 'patrol' },
+      { length: 3, model: 'submarine' },
+      { length: 3, model: 'destroyer' },
+      { length: 4, model: 'battler' },
+      { length: 5, model: 'carrier' },
+    ];
+    for (let i = 0; i < ships.length; i += 1) {
+      let notAdded = true;
+      do {
+        // randomly set each ship's starting coordinates and orientation
+        const coords = getRandomCoordinates();
+        ships[i].x = coords.x;
+        ships[i].y = coords.y;
+        ships[i].orientation = orientations[Math.round(Math.random())];
+        // now build a ship coordinate array (addShip expects this)
+        const tempShip = buildShip(ships[i]);
+        // try to add the ship
+        // if it fails notAdded is set to false so we reverse it to loop again
+        // it it succeeds notAdded is set to true so we reverse it and don't loop again
+        notAdded = !game.addShip(player, tempShip, ships[i].model);
+      } while (notAdded);
+    }
+  };
+
+  /*
+  Remove every ship from the grid and the tray
+  Generate random locations for each ship
+  Move the battleships to their newly assigned coordinates
+  */
+  const randomShips = () => {
+    setRandomShipLocations(1);
+    console.log(game.getPOneBoard());
+  };
+
   // if (game.playerOneShips() === 0 && game.playerTwoShips() === 0) {
   //   game.placeShips();
   //   setPlayerOneBoard(game.getPOneBoard());
@@ -235,6 +299,7 @@ const App = () => {
             canDropShip={canDropShip}
           />
           <ResetButton reset={reset} />
+          <RandomButtom randomShips={randomShips} />
         </main>
       </DndProvider>
     );
