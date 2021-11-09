@@ -207,6 +207,8 @@ const App = () => {
     // game.placeShips();
     setPlayerOneBoard(game.getPOneBoard());
     setPlayerTwoBoard(game.getPTwoBoard());
+    setTrayShips(SetupShips());
+    setGridShips([]);
     setPlacing(true);
   };
 
