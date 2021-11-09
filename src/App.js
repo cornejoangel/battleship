@@ -33,8 +33,10 @@ const App = () => {
     let aiResult = '';
     result = game.move(player, coords);
     if (result !== 'invalid') {
-      const aiAttack = game.aiMove();
-      aiResult = game.move(2, aiAttack);
+      do {
+        const aiAttack = game.aiMove();
+        aiResult = game.move(2, aiAttack);
+      } while (aiResult === 'invalid');
     } else {
       result = 'invalid - select a new target';
     }
