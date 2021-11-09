@@ -9,3 +9,7 @@
   grid-template-rows: 3fr 2fr 2fr;
   box-sizing: border-box;
 }
+
+.empty {
+  display: block;
+}

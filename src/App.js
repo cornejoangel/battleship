@@ -105,18 +105,23 @@ const App = () => {
     setTrayShips((prevShips) =>
       prevShips.filter((ship) => ship.model !== model)
     );
+
     // remove this ship from the grid if it is already here
     // then add it in its new location
     setGridShips((prevShips) =>
       prevShips.filter((s) => s.model !== temp.model)
     );
     setGridShips((prevShips) => prevShips.concat(temp));
-    // keep track of all the tiles this ship occupies
+
+    // remove the ship from the game board (in case it was already in the grid)
+    // (does nothing if it was not in the grid)
+    game.removeShipModel(1, temp.model);
+
+    // build the ship's coordinate array so we can add it to the board
     const tempShip = buildShip(temp);
-    if (game.checkLocation(1, tempShip) === true) {
-      game.removeShipModel(1, temp.model);
-      game.addShip(1, tempShip, temp.model);
-    }
+
+    // and add it back to the board so its new location will be up to date
+    game.addShip(1, tempShip, temp.model);
     setPlayerOneBoard(game.getPOneBoard());
   };
 
@@ -270,6 +275,18 @@ const App = () => {
     const randomizedShips = setRandomShipLocations(1);
     setTrayShips([]);
     setGridShips(randomizedShips);
+    // set the game boards
+    setPlayerOneBoard(game.getPOneBoard());
+    setPlayerTwoBoard(game.getPTwoBoard());
+  };
+
+  const startGame = () => {
+    setPlacing(false);
+    setRandomShipLocations(2);
+    setPlayerTwoBoard(game.getPTwoBoard());
+    // keeping this on to make testing easier
+    // *** must remove before full release ***
+    console.log(game.getPTwoBoard());
   };
 
   // if (game.playerOneShips() === 0 && game.playerTwoShips() === 0) {
@@ -288,6 +305,7 @@ const App = () => {
             moveShip={moveShip}
             rotateShip={rotateShip}
             trayShips={trayShips}
+            startGame={startGame}
           />
           <h2 className="friendly-heading">place your ships</h2>
           {/* <Grid
@@ -309,18 +327,20 @@ const App = () => {
     );
   } else {
     screen = (
-      <main>
-        <h2 className="enemy-heading">enemy waters</h2>
-        <Grid
-          player={1}
-          name="enemy"
-          tileSet={playerTwoBoard}
-          attack={attack}
-        />
-        <h2 className="friendly-heading">friendly waters</h2>
-        <Grid player={1} name="friendly" tileSet={playerOneBoard} />
-        <ResetButton reset={reset} />
-      </main>
+      <DndProvider backend={HTML5Backend}>
+        <main>
+          <h2 className="enemy-heading">enemy waters</h2>
+          <Grid
+            player={1}
+            name="enemy"
+            tileSet={playerTwoBoard}
+            attack={attack}
+          />
+          <h2 className="friendly-heading">friendly waters</h2>
+          <Grid player={1} name="friendly" tileSet={playerOneBoard} />
+          <ResetButton reset={reset} />
+        </main>
+      </DndProvider>
     );
   }
   return screen;
