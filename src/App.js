@@ -6,6 +6,7 @@ import PlacementGrid from './components/PlacementGrid';
 // import TurnIndicator from './components/TurnIndicator';
 import ResetButton from './components/ResetButton';
 import RandomButtom from './components/RandomButton';
+import MessageBox from './components/MessageBox';
 import ShipTray from './components/ShipTray';
 import Game from './modules/Game';
 import SetupShips from './modules/SetupShips';
@@ -19,6 +20,8 @@ const App = () => {
   const [placing, setPlacing] = useState(true);
   const [trayShips, setTrayShips] = useState(SetupShips());
   const [gridShips, setGridShips] = useState([]);
+  const [playerResult, setPlayerResult] = useState('');
+  const [AIResult, setAIResult] = useState('');
   const trayRef = useRef();
   const gridRef = useRef();
   trayRef.current = trayShips;
@@ -27,20 +30,17 @@ const App = () => {
   const attack = (e, player, coords) => {
     e.preventDefault();
     let result = '';
-    result = game.move(player, coords);
-    if (result === 'invalid') {
-      alert('invalid move! make another');
-      return;
-    }
-    alert(result);
-
-    // this block enables random CPU moves
     let aiResult = '';
-    const aiAttack = game.aiMove();
-    aiResult = game.move(2, aiAttack);
-    alert(`Your opponent strikes ${aiAttack.x}, ${aiAttack.y} - ${aiResult}`);
-    //
+    result = game.move(player, coords);
+    if (result !== 'invalid') {
+      const aiAttack = game.aiMove();
+      aiResult = game.move(2, aiAttack);
+    } else {
+      result = 'invalid - select a new target';
+    }
 
+    setPlayerResult(result);
+    setAIResult(aiResult);
     setPlayerOneBoard(game.getPOneBoard());
     setPlayerTwoBoard(game.getPTwoBoard());
   };
@@ -340,6 +340,7 @@ const App = () => {
           />
           <h2 className="friendly-heading">friendly waters</h2>
           <Grid player={1} name="friendly" tileSet={playerOneBoard} />
+          <MessageBox playerResult={playerResult} AIResult={AIResult} />
           <ResetButton reset={reset} />
         </main>
       </DndProvider>
