@@ -99,6 +99,176 @@ const Game = () => {
     playerTwoBoard.resetTiles();
   };
 
+  /*
+  what do you need in order to intelligently attack?
+  You need to be able to: 
+    read the results of your attacks
+    know where you've had a hit
+    know that ships are constructed in straight lines
+
+  The algorithm:
+
+  Attack randomly
+  When you get a hit
+    attack all of the adjacent tiles until you get another hit
+    keep attacking in that direction until you get a 'miss' or 'sunk'
+    if you got a sunk - return to attacking randomly (direction = '')
+    if you got a miss - change the attacking direction to the opposite
+
+  
+  currently stressing over the blooming complexity of dealing with invalid attacks
+  i think the way to do this is to have each direction attack check if the attack would be out of bounds. 
+  if it would then you just attack searchingFrom again (so you get turned around in result checks)
+  the result check of any invalid result just makes the direction the opposite
+
+  so....
+  add bound checks to direction attacks
+  change newCoords to be searchingFrom if gonna go out of bounds
+  make invalid results just change your direction (maybe also set recentHit to searchingFrom)
+
+  what happens if you have two horizontal ships stacked on top of each other
+  and you get a hit on the bottom one
+  you start your search by trying the tile above and get a hit
+  you set up as your direction and but your next move is a miss (or invalid!)
+  so you go back down to the tile below your first hit
+  you get another miss
+  currently, you will turn around again and endlessly loop invalid moves
+  i need to be able to know if ive already checked a direction before i set it as my direction
+  OR i need to recognize im in this situation and just reset to searching
+  how do you recognize you are in this situation
+  i cant set the direction from one i was on to one ive already checked
+
+  what if i kept an array of 'unsolved hits'
+  i only do random attacks when that array is empty
+  i remove from this array each time i get a 'sunk'
+  */
+  let direction = 'none';
+  let searchingFrom = '';
+  let recentHit = '';
+  const checkedDirections = [];
+
+  const checkBounds = (coords) => {
+    if (coords.x > 9 || coords.x < 0 || coords.y > 9 || coords.y < 0) {
+      return false;
+    }
+    return true;
+  };
+
+  const aiSmartMove = (coords) => {
+    let result = '';
+    let newCoords = coords;
+    const directions = ['up', 'down', 'left', 'right'];
+    if (direction === 'none') {
+      result = ai.randomAttack();
+    } else if (direction === 'searching' && !checkedDirections.contains('up')) {
+      checkedDirections.push('up');
+      newCoords = searchingFrom;
+      newCoords.y -= 1;
+      result = move(2, newCoords);
+    } else if (
+      direction === 'searching' &&
+      !checkedDirections.contains('down')
+    ) {
+      checkedDirections.push('down');
+      newCoords = searchingFrom;
+      newCoords.y += 1;
+      result = move(2, newCoords);
+    } else if (
+      direction === 'searching' &&
+      !checkedDirections.contains('left')
+    ) {
+      checkedDirections.push('left');
+      newCoords = searchingFrom;
+      newCoords.x -= 1;
+      result = move(2, newCoords);
+    } else if (
+      direction === 'searching' &&
+      !checkedDirections.contains('right')
+    ) {
+      checkedDirections.push('right');
+      newCoords = searchingFrom;
+      newCoords.x += 1;
+      result = move(2, newCoords);
+    } else if (direction === 'up') {
+      newCoords = recentHit;
+      newCoords.y -= 1;
+      if (checkBounds(newCoords) === false) {
+        newCoords = searchingFrom;
+      }
+      result = move(2, newCoords);
+    } else if (direction === 'down') {
+      newCoords = recentHit;
+      newCoords.y += 1;
+      if (checkBounds(newCoords) === false) {
+        newCoords = searchingFrom;
+      }
+      result = move(2, newCoords);
+    } else if (direction === 'left') {
+      newCoords = recentHit;
+      newCoords.x -= 1;
+      if (checkBounds(newCoords) === false) {
+        newCoords = searchingFrom;
+      }
+      result = move(2, newCoords);
+    } else if (direction === 'right') {
+      newCoords = recentHit;
+      newCoords.x += 1;
+      if (checkBounds(newCoords) === false) {
+        newCoords = searchingFrom;
+      }
+      result = move(2, newCoords);
+    }
+
+    if (result === 'hit' && direction === 'none') {
+      direction = 'searching';
+      searchingFrom = coords;
+    } else if (result === 'hit' && direction === 'searching') {
+      direction = checkedDirections[-1];
+      recentHit = newCoords;
+    } else if (result === 'sunk') {
+      console.log('whoa');
+      // todo
+    } else if (result !== 'hit' && directions.contains(direction)) {
+      // some direction has been set but we've hit a dead end
+      // now lets start from the original hit and turn around
+      switch (direction) {
+        case 'up':
+          // if i got to the point of going up i can't have checked down so go down
+          direction = 'down';
+          // checkedDirections.push('down');
+          break;
+        case 'down':
+          // if i am going down then i have already checked up, go left
+          direction = 'left';
+          // also this case will only ever happen if my searchingFrom was the bottom
+          // of two horizontally stacked ships
+          // so now I need to keep track of that ship I just found above this one
+          // so next add the logic of adding that to an array to come back to it later
+          // but ALSO what if there was ANOTHER HORIZONTAL next to the bottom ship
+          // on the left?
+          // theres no way to tell when you sink that ship to the left that it
+          // was not just the original horizontal unless i say which ship gets sunk
+          // so you are free to just go left until you get sunk
+          // and then having stored reference to the ship above come back to that after
+
+          // checkedDirections.push('left');
+          break;
+        case 'left':
+          // if i am going left, i have also checked up and down - go right
+          direction = 'right';
+          // checkedDirections.push('right');
+          break;
+        case 'right':
+          // this block can never be executed
+          // one of the other directions MUST have already been the correct one
+          console.log('I was wrong');
+          break;
+        default:
+          break;
+      }
+    }
+  };
+
   const aiMove = () => ai.randomAttack();
 
   const addShip = (player, coords, model = '') => {
