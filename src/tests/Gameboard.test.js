@@ -112,6 +112,13 @@ test('The same attack cannot be made more than once', () => {
   expect(g.receiveAttack({ x: 2, y: 3 })).toEqual('invalid');
 });
 
+test('An attack that is out of bounds is invalid', () => {
+  expect(g.receiveAttack({ x: 10, y: 4 })).toEqual('invalid');
+  expect(g.receiveAttack({ x: 1, y: 40 })).toEqual('invalid');
+  expect(g.receiveAttack({ x: -1, y: 40 })).toEqual('invalid');
+  expect(g.receiveAttack({ x: 7, y: -3 })).toEqual('invalid');
+});
+
 test('The board updates the number of ships when one is sunk', () => {
   expect(g.shipCount()).toBe(2);
   g.receiveAttack({ x: 1, y: 3 });

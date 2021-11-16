@@ -93,6 +93,11 @@ const Gameboard = () => {
       return 'invalid';
     }
 
+    // the attack was out of bounds
+    if (coord.x > 9 || coord.x < 0 || coord.y > 9 || coord.y < 0) {
+      return 'invalid';
+    }
+
     // this attack has not been made and it is a miss
     coord.type = 'miss';
     tiles = tiles.concat(coord);
