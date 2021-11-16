@@ -22,6 +22,7 @@ const App = () => {
   const [gridShips, setGridShips] = useState([]);
   const [playerResult, setPlayerResult] = useState('');
   const [AIResult, setAIResult] = useState('');
+  const [gameOver, setGameOver] = useState(false);
   const trayRef = useRef();
   const gridRef = useRef();
   trayRef.current = trayShips;
@@ -31,16 +32,24 @@ const App = () => {
     e.preventDefault();
     let result = '';
     let aiResult = '';
-    result = game.move(player, coords);
-    if (result !== 'invalid') {
+    if (!gameOver) {
+      result = game.move(player, coords);
+    }
+    if (result !== 'invalid' && !gameOver) {
       do {
         const aiAttack = game.aiMove();
         aiResult = game.move(2, aiAttack);
       } while (aiResult === 'invalid');
-    } else {
+    } else if (!gameOver) {
       result = 'invalid - select a new target';
+    } else {
+      result = game.checkGameOver();
+      aiResult = game.checkGameOver();
     }
 
+    const gameOverStatus = game.checkGameOver();
+
+    setGameOver(gameOverStatus);
     setPlayerResult(result);
     setAIResult(aiResult);
     setPlayerOneBoard(game.getPOneBoard());
@@ -212,6 +221,9 @@ const App = () => {
     setTrayShips(SetupShips());
     setGridShips([]);
     setPlacing(true);
+    setGameOver(false);
+    setPlayerResult('');
+    setAIResult('');
   };
 
   /*
@@ -342,7 +354,11 @@ const App = () => {
           />
           <h2 className="friendly-heading">friendly waters</h2>
           <Grid player={1} name="friendly" tileSet={playerOneBoard} />
-          <MessageBox playerResult={playerResult} AIResult={AIResult} />
+          <MessageBox
+            playerResult={playerResult}
+            AIResult={AIResult}
+            gameOver={gameOver}
+          />
           <ResetButton reset={reset} />
         </main>
       </DndProvider>

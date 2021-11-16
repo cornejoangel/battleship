@@ -43,8 +43,11 @@ const Game = () => {
   };
 
   const checkGameOver = () => {
-    if (playerOneShips() < 1 || playerTwoShips() < 1) {
-      return true;
+    if (playerOneShips() < 1) {
+      return 'player 2 wins!';
+    }
+    if (playerTwoShips() < 1) {
+      return 'player 1 wins!';
     }
     return false;
   };
@@ -201,6 +204,7 @@ const Game = () => {
     } else if (result === 'hit') {
       recentHit = newCoords;
     }
+    return result;
   };
 
   const aiMove = () => ai.randomAttack();
@@ -249,6 +253,8 @@ const Game = () => {
     playerOneShips,
     playerTwoShips,
     move,
+    checkGameOver,
+    smartMove,
     getPOneBoard,
     getPTwoBoard,
     getCurrentTurn,
