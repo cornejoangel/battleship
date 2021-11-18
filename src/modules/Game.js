@@ -144,67 +144,67 @@ const Game = () => {
   (yes I have thought a great deal about it)
   */
 
-  let direction = 'none';
-  let searchingFrom = '';
-  let recentHit = '';
-
-  const smartMove = (coords) => {
+  const smartMove = (coords, direction, searchingFrom, recentHit) => {
     let result = '';
-    let newCoords = '';
+    const newCoords = coords;
+    let newDirection = direction;
+    let newSearching = searchingFrom;
+    let newRecent = recentHit;
+
     if (direction === 'none') {
       result = move(2, coords);
     }
     if (direction === 'up') {
-      newCoords = recentHit;
+      Object.assign(newCoords, recentHit);
       newCoords.y -= 1;
       result = move(2, newCoords);
     } else if (direction === 'down') {
-      newCoords = recentHit;
+      Object.assign(newCoords, recentHit);
       newCoords.y += 1;
       result = move(2, newCoords);
     } else if (direction === 'left') {
-      newCoords = recentHit;
+      Object.assign(newCoords, recentHit);
       newCoords.x -= 1;
       result = move(2, newCoords);
     } else if (direction === 'right') {
-      newCoords = recentHit;
+      Object.assign(newCoords, recentHit);
       newCoords.x += 1;
       result = move(2, newCoords);
     }
 
     if (direction === 'none' && result === 'hit') {
-      searchingFrom = coords;
-      recentHit = coords;
-      direction = 'up';
-    }
-    if (result === 'sunk') {
-      direction = 'none';
-      searchingFrom = '';
-      recentHit = '';
+      Object.assign(newSearching, newCoords);
+      Object.assign(newRecent, newCoords);
+      newDirection = 'up';
+    } else if (result === 'sunk') {
+      newDirection = 'none';
+      newSearching = {};
+      newRecent = {};
     } else if (direction !== 'none' && result !== 'hit') {
+      console.log(newDirection);
       switch (direction) {
         case 'up':
-          direction = 'down';
+          newDirection = 'down';
           break;
         case 'down':
-          direction = 'left';
+          newDirection = 'left';
           break;
         case 'left':
-          direction = 'right';
+          newDirection = 'right';
           break;
         case 'right':
           // we have checked all directions, reset now
-          direction = 'none';
-          searchingFrom = '';
+          newDirection = 'none';
           break;
         default:
           break;
       }
-      recentHit = searchingFrom;
+      Object.assign(newRecent, newSearching);
     } else if (result === 'hit') {
-      recentHit = newCoords;
+      Object.assign(newRecent, newCoords);
     }
-    return result;
+    // console.log(newCoords);
+    return { result, newDirection, newSearching, newRecent };
   };
 
   const aiMove = () => ai.randomAttack();

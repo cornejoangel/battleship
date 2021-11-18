@@ -23,10 +23,31 @@ const App = () => {
   const [playerResult, setPlayerResult] = useState('');
   const [AIResult, setAIResult] = useState('');
   const [gameOver, setGameOver] = useState(false);
+  const [AIDirection, setAIDirection] = useState('none');
+  const [AISearchingFrom, setAISearchingFrom] = useState({});
+  const [AIRecentHit, setAIRecentHit] = useState({});
   const trayRef = useRef();
   const gridRef = useRef();
   trayRef.current = trayShips;
   gridRef.current = gridShips;
+
+  const directionRef = useRef();
+  const searchingRef = useRef();
+  const recentRef = useRef();
+  directionRef.current = AIDirection;
+  searchingRef.current = AISearchingFrom;
+  recentRef.current = AIRecentHit;
+
+  /*
+  This is literally just Player.randomAttack()
+  I should ideally refactor everything to remove the need for players and just
+  use this function instead
+  */
+  const getRandomCoordinates = () => {
+    const x = Math.floor(Math.random() * 10);
+    const y = Math.floor(Math.random() * 10);
+    return { x, y };
+  };
 
   const attack = (e, player, coords) => {
     e.preventDefault();
@@ -37,9 +58,63 @@ const App = () => {
     }
     if (result !== 'invalid' && !gameOver) {
       do {
-        const aiAttack = game.aiMove();
-        aiResult = game.move(2, aiAttack);
-      } while (aiResult === 'invalid');
+        if (aiResult?.result === 'invalid' && aiResult.newDirection === 'up') {
+          aiResult = game.smartMove(
+            getRandomCoordinates(),
+            'down',
+            searchingRef.current,
+            recentRef.current
+          );
+        } else if (
+          aiResult?.result === 'invalid' &&
+          aiResult.newDirection === 'down'
+        ) {
+          aiResult = game.smartMove(
+            getRandomCoordinates(),
+            'down',
+            searchingRef.current,
+            recentRef.current
+          );
+        } else if (
+          aiResult?.result === 'invalid' &&
+          aiResult.newDirection === 'left'
+        ) {
+          aiResult = game.smartMove(
+            getRandomCoordinates(),
+            'left',
+            searchingRef.current,
+            recentRef.current
+          );
+        } else if (
+          aiResult?.result === 'invalid' &&
+          aiResult.newDirection === 'right'
+        ) {
+          aiResult = game.smartMove(
+            getRandomCoordinates(),
+            'right',
+            searchingRef.current,
+            recentRef.current
+          );
+        } else if (
+          aiResult?.result === 'invalid' &&
+          aiResult.newDirection === 'none'
+        ) {
+          aiResult = game.smartMove(
+            getRandomCoordinates(),
+            'none',
+            searchingRef.current,
+            recentRef.current
+          );
+        } else {
+          aiResult = game.smartMove(
+            getRandomCoordinates(),
+            directionRef.current,
+            searchingRef.current,
+            recentRef.current
+          );
+        }
+        console.log(aiResult);
+      } while (aiResult.result === 'invalid');
     } else if (!gameOver) {
       result = 'invalid - select a new target';
     } else {
@@ -51,7 +126,10 @@ const App = () => {
 
     setGameOver(gameOverStatus);
     setPlayerResult(result);
-    setAIResult(aiResult);
+    setAIResult(aiResult.result);
+    setAIDirection(aiResult.newDirection);
+    setAISearchingFrom(aiResult.newSearching);
+    setAIRecentHit(aiResult.newRecent);
     setPlayerOneBoard(game.getPOneBoard());
     setPlayerTwoBoard(game.getPTwoBoard());
   };
@@ -224,17 +302,6 @@ const App = () => {
     setGameOver(false);
     setPlayerResult('');
     setAIResult('');
-  };
-
-  /*
-  This is literally just Player.randomAttack()
-  I should ideally refactor everything to remove the need for players and just
-  use this function instead
-  */
-  const getRandomCoordinates = () => {
-    const x = Math.floor(Math.random() * 10);
-    const y = Math.floor(Math.random() * 10);
-    return { x, y };
   };
 
   /*
