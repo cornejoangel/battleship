@@ -5,7 +5,19 @@ import { ItemTypes } from '../modules/Constants';
 import '../styles/Tile.css';
 
 const Tile = (props) => {
-  const { type, x, y, name, player, attack, moveShip, canDropShip } = props;
+  const {
+    type,
+    x,
+    y,
+    name,
+    player,
+    attack,
+    moveShip,
+    canDropShip,
+    recentX,
+    recentY,
+  } = props;
+  const recentHit = x === recentX && y === recentY;
 
   const [{ isOver }, drop] = useDrop(
     () => ({
@@ -24,7 +36,7 @@ const Tile = (props) => {
     tile = (
       <button
         type="button"
-        className={`tile enemy-tile ${type}`}
+        className={`tile enemy-tile ${type} ${recentHit ? 'recent-hit' : ''}`}
         onClick={(e) => attack(e, player, { x, y })}
       >
         {x}, {y}
@@ -34,7 +46,7 @@ const Tile = (props) => {
     tile = (
       <button
         type="button"
-        className={`tile ${type}`}
+        className={`tile ${type} ${recentHit ? 'recent-hit' : ''}`}
         ref={drop}
         style={{
           gridColumn: x + 1,
@@ -58,6 +70,8 @@ Tile.propTypes = {
   attack: PropTypes.func,
   moveShip: PropTypes.func,
   canDropShip: PropTypes.func,
+  recentX: PropTypes.number,
+  recentY: PropTypes.number,
 };
 
 export default Tile;

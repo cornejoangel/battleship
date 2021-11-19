@@ -1,3 +1,8 @@
+html {
+  background-color: rgb(44, 46, 73);
+  color: white;
+}
+
 main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

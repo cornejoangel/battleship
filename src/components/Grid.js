@@ -4,7 +4,7 @@ import Tile from './Tile';
 import '../styles/Grid.css';
 
 const Grid = (props) => {
-  const { player, name, tileSet, attack, moveShip } = props;
+  const { player, name, tileSet, attack, moveShip, recentX, recentY } = props;
 
   let tiles = [];
   for (let i = 0; i < 10; i += 1) {
@@ -94,6 +94,8 @@ const Grid = (props) => {
             y={tile.y}
             name={name}
             moveShip={moveShip}
+            recentX={recentX}
+            recentY={recentY}
             key={`${tile.x}${tile.y}`}
           />
         ))}
@@ -110,6 +112,8 @@ Grid.propTypes = {
   tileSet: PropTypes.array,
   attack: PropTypes.func,
   moveShip: PropTypes.func,
+  recentX: PropTypes.number,
+  recentY: PropTypes.number,
 };
 
 export default Grid;

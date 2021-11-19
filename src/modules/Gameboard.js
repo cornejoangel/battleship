@@ -65,6 +65,18 @@ const Gameboard = () => {
     }
   };
 
+  const markSunk = (model) => {
+    if (model === undefined) {
+      return;
+    }
+    tiles = tiles.map((tile) => {
+      if (tile.model === model) {
+        tile.type = 'sunk';
+      }
+      return tile;
+    });
+  };
+
   const receiveAttack = (coord) => {
     const attack = tiles.find(
       (tile) => tile.x === coord.x && tile.y === coord.y
@@ -83,6 +95,7 @@ const Gameboard = () => {
       });
       if (sunk) {
         ships -= 1;
+        markSunk(attack.model);
         return 'sunk';
       }
       return 'hit';

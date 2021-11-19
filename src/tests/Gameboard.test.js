@@ -119,6 +119,22 @@ test('An attack that is out of bounds is invalid', () => {
   expect(g.receiveAttack({ x: 7, y: -3 })).toEqual('invalid');
 });
 
+test('Sunken ships are marked as such', () => {
+  expect(g.shipCount()).toBe(2);
+  g.addShip(
+    [
+      { x: 9, y: 0 },
+      { x: 9, y: 1 },
+    ],
+    'patrol'
+  );
+  expect(g.shipCount()).toBe(3);
+  expect(g.receiveAttack({ x: 9, y: 0 })).toEqual('hit');
+  expect(g.receiveAttack({ x: 9, y: 1 })).toEqual('sunk');
+  expect(g.shipCount()).toBe(2);
+  console.log(g.getTiles());
+});
+
 test('The board updates the number of ships when one is sunk', () => {
   expect(g.shipCount()).toBe(2);
   g.receiveAttack({ x: 1, y: 3 });

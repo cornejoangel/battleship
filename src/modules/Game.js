@@ -204,7 +204,7 @@ const Game = () => {
       Object.assign(newRecent, newCoords);
     }
     // console.log(newCoords);
-    return { result, newDirection, newSearching, newRecent };
+    return { result, newDirection, newSearching, newRecent, newCoords };
   };
 
   const aiMove = () => ai.randomAttack();

@@ -8,11 +8,9 @@
 }
 
 .friendly {
-  background-color: rgb(235, 242, 255);
   grid-column: 1;
 }
 
 .enemy {
-  background-color: rgb(255, 234, 234);
   grid-column: 2;
 }

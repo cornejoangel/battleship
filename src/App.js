@@ -26,6 +26,8 @@ const App = () => {
   const [AIDirection, setAIDirection] = useState('none');
   const [AISearchingFrom, setAISearchingFrom] = useState({});
   const [AIRecentHit, setAIRecentHit] = useState({});
+  const [recentX, setRecentX] = useState(-1);
+  const [recentY, setRecentY] = useState(-1);
   const trayRef = useRef();
   const gridRef = useRef();
   trayRef.current = trayShips;
@@ -124,6 +126,10 @@ const App = () => {
 
     const gameOverStatus = game.checkGameOver();
 
+    const newX = gameOverStatus ? recentX : aiResult.newCoords.x;
+    const newY = gameOverStatus ? recentY : aiResult.newCoords.y;
+    setRecentX(newX);
+    setRecentY(newY);
     setGameOver(gameOverStatus);
     setPlayerResult(result);
     setAIResult(aiResult.result);
@@ -420,7 +426,13 @@ const App = () => {
             attack={attack}
           />
           <h2 className="friendly-heading">friendly waters</h2>
-          <Grid player={1} name="friendly" tileSet={playerOneBoard} />
+          <Grid
+            player={1}
+            name="friendly"
+            tileSet={playerOneBoard}
+            recentX={recentX}
+            recentY={recentY}
+          />
           <MessageBox
             playerResult={playerResult}
             AIResult={AIResult}
