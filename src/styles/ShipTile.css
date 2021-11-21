@@ -1,3 +1,14 @@
 .ship-tile {
   cursor: move;
 }
+
+.front {
+  background-color: #689653 !important;
+  border: 2px solid black;
+  border-radius: 5px;
+  transform: scale(1.1, 1.1);
+}
+
+.back {
+  background-color: rgba(49, 74, 37, 0.9) !important;
+}

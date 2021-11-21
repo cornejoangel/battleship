@@ -28,6 +28,8 @@ const Battleship = (props) => {
       moveShip={moveShip}
       rotateShip={rotateShip}
       model={model}
+      // eslint-disable-next-line react/jsx-boolean-value
+      front={true}
       key={`${x}${y}`}
     />
   );
@@ -46,6 +48,7 @@ const Battleship = (props) => {
         moveShip={moveShip}
         rotateShip={rotateShip}
         model={model}
+        front={false}
         key={`${shipCoords.x}${shipCoords.y}`}
       />
     );
