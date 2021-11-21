@@ -36,7 +36,19 @@
   border: 5px solid goldenrod !important;
   border-radius: 3px;
   transform: scale(1.2, 1.2);
-  transition: all 0.3s ease;
+  animation: recentHit 0.5s ease;
+}
+
+@keyframes recentHit {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.4, 1.4);
+  }
+  100% {
+    transform: scale(1.2, 1.2);
+  }
 }
 
 .sunk {
