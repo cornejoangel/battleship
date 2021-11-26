@@ -46,7 +46,9 @@ const Tile = (props) => {
     tile = (
       <button
         type="button"
-        className={`tile ${type} ${recentHit ? 'recent-hit' : ''}`}
+        className={`tile ${type} ${recentHit ? 'recent-hit' : ''} ${
+          isOver ? 'is-over' : ''
+        }`}
         ref={drop}
         style={{
           gridColumn: x + 1,
