@@ -19,4 +19,13 @@ const ShipTile = (props) => {
   return tile;
 };
 
+ShipTile.propTypes = {
+  type: PropTypes.string,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  rotateShip: PropTypes.func,
+  model: PropTypes.string,
+  front: PropTypes.bool,
+};
+
 export default ShipTile;
