@@ -123,13 +123,13 @@ const App = () => {
       result = 'invalid - select a new target';
     } else {
       result = game.checkGameOver();
-      aiResult = game.checkGameOver();
+      aiResult.result = game.checkGameOver();
     }
 
     const gameOverStatus = game.checkGameOver();
 
-    const newX = gameOverStatus ? recentX : aiResult.newCoords.x;
-    const newY = gameOverStatus ? recentY : aiResult.newCoords.y;
+    const newX = aiResult.newCoords.x;
+    const newY = aiResult.newCoords.y;
     setRecentX(newX);
     setRecentY(newY);
     setGameOver(gameOverStatus);
