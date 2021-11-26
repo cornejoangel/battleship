@@ -54,7 +54,16 @@ const App = () => {
   const attack = (e, player, coords) => {
     e.preventDefault();
     let result = '';
-    let aiResult = '';
+    let aiResult = {
+      result: AIResult,
+      newDirection: AIDirection,
+      newSearching: searchingRef.current,
+      newRecent: recentRef.current,
+      newCoords: {
+        x: recentX,
+        y: recentY,
+      },
+    };
     if (!gameOver) {
       result = game.move(player, coords);
     }
