@@ -60,14 +60,7 @@ const App = () => {
     }
     if (result !== 'invalid' && !gameOver) {
       do {
-        if (aiResult?.result === 'invalid' && aiResult.newDirection === 'up') {
-          aiResult = game.smartMove(
-            getRandomCoordinates(),
-            'down',
-            searchingRef.current,
-            recentRef.current
-          );
-        } else if (
+        if (
           aiResult?.result === 'invalid' &&
           aiResult.newDirection === 'down'
         ) {
