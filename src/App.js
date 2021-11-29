@@ -14,7 +14,7 @@ import './styles/normalize.css';
 import './styles/App.css';
 
 const App = () => {
-  const [game, setGame] = useState(Game());
+  const [game] = useState(Game());
   const [playerOneBoard, setPlayerOneBoard] = useState(game.getPOneBoard());
   const [playerTwoBoard, setPlayerTwoBoard] = useState(game.getPTwoBoard());
   const [placing, setPlacing] = useState(true);
@@ -300,9 +300,7 @@ const App = () => {
   };
 
   const reset = () => {
-    setGame(Game());
     game.reset();
-    // game.placeShips();
     setPlayerOneBoard(game.getPOneBoard());
     setPlayerTwoBoard(game.getPTwoBoard());
     setTrayShips(SetupShips());
@@ -311,6 +309,8 @@ const App = () => {
     setGameOver(false);
     setPlayerResult('');
     setAIResult('');
+    setRecentX(-1);
+    setRecentY(-1);
   };
 
   /*
