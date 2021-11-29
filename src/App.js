@@ -274,6 +274,7 @@ const App = () => {
 
     setTrayShips(tempTray);
     setGridShips(tempGrid);
+    setPlayerOneBoard(game.getPOneBoard());
   };
 
   /*
