@@ -3,7 +3,6 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Grid from './components/Grid';
 import PlacementGrid from './components/PlacementGrid';
-// import TurnIndicator from './components/TurnIndicator';
 import ResetButton from './components/ResetButton';
 import RandomButtom from './components/RandomButton';
 import MessageBox from './components/MessageBox';
@@ -40,11 +39,6 @@ const App = () => {
   searchingRef.current = AISearchingFrom;
   recentRef.current = AIRecentHit;
 
-  /*
-  This is literally just Player.randomAttack()
-  I should ideally refactor everything to remove the need for players and just
-  use this function instead
-  */
   const getRandomCoordinates = () => {
     const x = Math.floor(Math.random() * 10);
     const y = Math.floor(Math.random() * 10);
@@ -379,12 +373,6 @@ const App = () => {
     // *** must remove before full release ***
     console.log(game.getPTwoBoard());
   };
-
-  // if (game.playerOneShips() === 0 && game.playerTwoShips() === 0) {
-  //   game.placeShips();
-  //   setPlayerOneBoard(game.getPOneBoard());
-  //   setPlayerTwoBoard(game.getPTwoBoard());
-  // }
 
   let screen = null;
 
