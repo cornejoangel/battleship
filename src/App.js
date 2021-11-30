@@ -117,7 +117,6 @@ const App = () => {
             recentRef.current
           );
         }
-        console.log(aiResult);
       } while (aiResult.result === 'invalid');
     } else if (!gameOver) {
       result = 'invalid - select a new target';
