@@ -3,4 +3,12 @@
   grid-row: 1;
   margin-left: 300px;
   margin-top: 20px;
+  background-color: inherit;
+  color: white;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  border: 2px solid #4b5096;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
 }
