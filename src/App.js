@@ -318,9 +318,9 @@ const App = () => {
   */
   const setRandomShipLocations = (player) => {
     if (player === 1) {
-      game.resetPOne();
+      game.resetPlayerOne();
     } else if (player === 2) {
-      game.resetPTwo();
+      game.resetPlayerTwo();
     }
     // set the basic data for the ships that will not change
     const orientations = ['horizontal', 'vertical'];

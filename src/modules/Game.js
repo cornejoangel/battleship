@@ -76,6 +76,13 @@ const Game = () => {
     playerTwoBoard = Gameboard();
   };
 
+  const resetPlayerOne = () => {
+    playerOneBoard = Gameboard();
+  };
+
+  const resetPlayerTwo = () => {
+    playerTwoBoard = Gameboard();
+  };
   /*
   smartMove assumes it will be called with a pair of random coordinates.
 
@@ -230,6 +237,8 @@ const Game = () => {
     getPOneBoard,
     getPTwoBoard,
     reset,
+    resetPlayerOne,
+    resetPlayerTwo,
   };
 };
 
