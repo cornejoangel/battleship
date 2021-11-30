@@ -1,8 +1,6 @@
 import Gameboard from './Gameboard';
-import Player from './Player';
 
 const Game = () => {
-  const ai = Player();
   let playerOneBoard = Gameboard();
   let playerTwoBoard = Gameboard();
   const playerOneShips = () => playerOneBoard.shipCount();
@@ -183,8 +181,6 @@ const Game = () => {
     return { result, newDirection, newSearching, newRecent, newCoords };
   };
 
-  const aiMove = () => ai.randomAttack();
-
   const addShip = (player, coords, model = '') => {
     let result = null;
     if (player === 1) {
@@ -234,7 +230,6 @@ const Game = () => {
     getPOneBoard,
     getPTwoBoard,
     reset,
-    aiMove,
   };
 };
 
