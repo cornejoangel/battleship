@@ -12,7 +12,7 @@ const ShipTile = (props) => {
       onClick={(e) => rotateShip(e, model)}
       className={`tile ship ship-tile ${front ? 'front' : 'back'}`}
     >
-      {x}, {y}
+      {/* {x}, {y} */}
     </button>
   );
 

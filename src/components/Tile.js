@@ -39,7 +39,7 @@ const Tile = (props) => {
         className={`tile enemy-tile ${type} ${recentHit ? 'recent-hit' : ''}`}
         onClick={(e) => attack(e, player, { x, y })}
       >
-        {x}, {y}
+        {/* {x}, {y} */}
       </button>
     );
   } else {
@@ -55,7 +55,7 @@ const Tile = (props) => {
           gridRow: y + 1,
         }}
       >
-        {x}, {y}
+        {/* {x}, {y} */}
       </button>
     );
   }

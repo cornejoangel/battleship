@@ -4,7 +4,7 @@
   height: 500px;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  grid-row: 2;
+  grid-row: 3;
 }
 
 .friendly {
