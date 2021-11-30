@@ -1,3 +1,6 @@
 .reset {
-  grid-column: 1 / span 2;
+  /* grid-column: 1 / span 2; */
+  position: absolute;
+  top: 30px;
+  right: 50px;
 }

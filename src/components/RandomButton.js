@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/RandomButton.css';
 
 const RandomButtom = (props) => {
   const { randomShips } = props;

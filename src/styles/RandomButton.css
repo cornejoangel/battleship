@@ -1,0 +1,15 @@
+.random {
+  grid-column: 1 / span 2;
+  margin-top: 50px;
+  font-size: 24px;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  background-color: #4B5096;
+  color: white;
+  border: 2px solid white;
+  border: none;
+  box-shadow: 0px 0px 20px 0px  black;
+  border-radius: 5px;
+  padding: 15px 30px;
+  cursor: pointer;
+}

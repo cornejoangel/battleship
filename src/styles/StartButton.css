@@ -1,0 +1,12 @@
+.start {
+  font-size: 70px;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  background-color: #e91212;
+  color: white;
+  border: 5px groove #c01111;
+  box-shadow: 3px 3px #c01010;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
