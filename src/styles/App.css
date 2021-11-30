@@ -12,6 +12,8 @@ main {
 
 h2 {
   grid-row: 2;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
 }
 
 .enemy-heading {
