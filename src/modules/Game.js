@@ -74,18 +74,8 @@ const Game = () => {
   const getPTwoBoard = () => playerTwoBoard.getTiles();
 
   const reset = () => {
-    // playerOneBoard.resetTiles();
-    // playerTwoBoard.resetTiles();
     playerOneBoard = Gameboard();
     playerTwoBoard = Gameboard();
-  };
-
-  const resetPOne = () => {
-    playerOneBoard.resetTiles();
-  };
-
-  const resetPTwo = () => {
-    playerTwoBoard.resetTiles();
   };
 
   /*
@@ -244,8 +234,6 @@ const Game = () => {
     getPOneBoard,
     getPTwoBoard,
     reset,
-    resetPOne,
-    resetPTwo,
     aiMove,
   };
 };

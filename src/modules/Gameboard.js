@@ -119,8 +119,6 @@ const Gameboard = () => {
 
   const getTiles = () => tiles;
 
-  const resetTiles = () => (tiles = []);
-
   return {
     shipCount,
     addShip,
@@ -129,7 +127,6 @@ const Gameboard = () => {
     removeModel,
     receiveAttack,
     getTiles,
-    resetTiles,
   };
 };
 
