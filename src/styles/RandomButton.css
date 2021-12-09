@@ -13,3 +13,7 @@
   padding: 15px 30px;
   cursor: pointer;
 }
+
+.random:hover {
+  background-color: rgba(75, 80, 150, 0.8);
+}

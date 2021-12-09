@@ -10,3 +10,7 @@
   padding: 5px;
   cursor: pointer;
 }
+
+.start:hover {
+  background-color: rgba(233, 18, 18, 0.95);
+}
