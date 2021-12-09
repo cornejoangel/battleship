@@ -11,4 +11,5 @@
 
 .back {
   background-color: rgba(49, 74, 37, 0.9) !important;
+  cursor: pointer;
 }
