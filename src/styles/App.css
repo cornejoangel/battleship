@@ -23,3 +23,16 @@ h2 {
 .friendly-heading {
   grid-column: 1;
 }
+
+.tray-info {
+  grid-column: 2;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 16px;
+  padding-left: 0;
+}
+
+.tray-info li {
+  list-style: none;
+}

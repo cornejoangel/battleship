@@ -380,6 +380,10 @@ const App = () => {
     screen = (
       <DndProvider backend={HTML5Backend}>
         <main>
+          <ul className="tray-info">
+            <li>click to rotate</li>
+            <li>use the lighter-colored squares to drag and drop</li>
+          </ul>
           <ShipTray
             moveShip={moveShip}
             rotateShip={rotateShip}
