@@ -1,14 +1,16 @@
 .reset {
   grid-column: 2;
   grid-row: 1;
-  margin-left: 300px;
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: inherit;
   color: white;
   font-family: 'Share Tech Mono', monospace;
   text-transform: uppercase;
-  border: 2px solid #4b5096;
+  border: 3px solid #4b5096;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   padding: 5px 10px;
+  justify-self: end;
+  margin-right: 50px;
 }
