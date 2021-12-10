@@ -1,20 +1,37 @@
+/* eslint-disable react/jsx-boolean-value */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import '../styles/InfoButton.css';
 
-const InfoButton = (props) => {
-  const { openInfo } = props;
+const InfoButton = () => {
   const [showModal, setShowModal] = useState(false);
+  const openInfo = () => {
+    setShowModal(true);
+  };
+
+  const closeInfo = () => {
+    setShowModal(false);
+  };
 
   return (
-    <button type="button" className="info" onClick={openInfo}>
-      info
-    </button>
+    <div className="info-container">
+      <button type="button" className="info" onClick={openInfo}>
+        info
+      </button>
+      <ReactModal
+        isOpen={showModal}
+        shouldCloseOnOverlayClick={true}
+        shouldCloseOnEsc={true}
+        onRequestClose={closeInfo}
+        className="info-content"
+        portalClassName="info-portal"
+      >
+        <button type="button" className="close-info" onClick={closeInfo}>
+          close
+        </button>
+      </ReactModal>
+    </div>
   );
 };
 
-InfoButton.propTypes = {
-  openInfo: PropTypes.func,
-};
 export default InfoButton;
