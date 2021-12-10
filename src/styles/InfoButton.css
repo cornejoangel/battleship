@@ -29,10 +29,8 @@
 
 .info-content {
   position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
+  width: 600px;
+  height: 600px;
   border: 1px solid #ccc;
   background: #fff;
   overflow: auto;
@@ -40,9 +38,23 @@
   outline: none;
   padding: 20px;
   z-index: 2;
+  box-shadow: 0px 0px 50px 5px black;
+  color: black;
 }
 
 .info-portal {
   position: absolute;
   z-index: 2;
+}
+
+.info-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

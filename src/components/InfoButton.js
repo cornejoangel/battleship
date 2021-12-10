@@ -24,8 +24,21 @@ const InfoButton = () => {
         shouldCloseOnEsc={true}
         onRequestClose={closeInfo}
         className="info-content"
+        overlayClassName="info-overlay"
         portalClassName="info-portal"
       >
+        <h2>This is an implementation of Battleship</h2>
+        <p>
+          Battleship is a 2 player game where each player places an identical
+          set of ships onto a grid in whatever locations they choose. The
+          players then take turns "attacking" specific tiles on their opponents
+          grid. When a tile that contains a section of a ship is attacked, that
+          section of ship is damaged. If all of a ship's sections are damaged
+          then that ship is sunk. The first player to sink all of their
+          opponent's ships wins.
+        </p>
+        <h3>How to Play</h3>
+        <h3>Your Opponent</h3>
         <button type="button" className="close-info" onClick={closeInfo}>
           close
         </button>
