@@ -1,0 +1,25 @@
+.info {
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 10px;
+  background-color: inherit;
+  color: white;
+  font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  justify-self: end;
+  margin-right: 140px;
+}
+
+.info:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.0);
+  /* 
+  this is a kind of a hack that keeps the button one solid color
+  otherwise the border was visibly lighter for some reason
+  */
+}

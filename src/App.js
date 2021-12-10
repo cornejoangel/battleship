@@ -4,6 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import Grid from './components/Grid';
 import PlacementGrid from './components/PlacementGrid';
 import ResetButton from './components/ResetButton';
+import InfoButton from './components/InfoButton';
 import RandomButtom from './components/RandomButton';
 import MessageBox from './components/MessageBox';
 import ShipTray from './components/ShipTray';
@@ -27,6 +28,7 @@ const App = () => {
   const [AIRecentHit, setAIRecentHit] = useState({});
   const [recentX, setRecentX] = useState(-1);
   const [recentY, setRecentY] = useState(-1);
+  // const [showModal, setShowModal] = useState(false);
   const trayRef = useRef();
   const gridRef = useRef();
   trayRef.current = trayShips;
@@ -374,6 +376,10 @@ const App = () => {
     console.log(game.getPTwoBoard());
   };
 
+  const openInfo = () => {
+    console.log('bruh');
+  };
+
   let screen = null;
 
   if (placing) {
@@ -404,6 +410,7 @@ const App = () => {
             canDropShip={canDropShip}
           />
           <ResetButton reset={reset} />
+          <InfoButton openInfo={openInfo} />
           <RandomButtom randomShips={randomShips} />
         </main>
       </DndProvider>
@@ -433,6 +440,7 @@ const App = () => {
             gameOver={gameOver}
           />
           <ResetButton reset={reset} />
+          <InfoButton openInfo={openInfo} />
         </main>
       </DndProvider>
     );
