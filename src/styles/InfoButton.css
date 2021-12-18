@@ -111,3 +111,7 @@ h3.info-right::before {
   justify-content: center;
   align-items: center;
 }
+
+.close-info {
+  margin-top: 20px;
+}

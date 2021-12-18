@@ -59,7 +59,7 @@ const InfoButton = () => {
           when it gets a hit and will probe the surrounding area trying to sink
           the rest of your ship. Don't underestimate your opponent!
         </p>
-        <button type="button" className="close-info" onClick={closeInfo}>
+        <button type="button" className="info close-info" onClick={closeInfo}>
           close
         </button>
       </ReactModal>
