@@ -29,17 +29,70 @@
 
 .info-content {
   position: absolute;
-  width: 600px;
+  width: 700px;
   height: 600px;
-  border: 1px solid #ccc;
-  background: #fff;
+  background-color: rgb(44, 46, 73);
   overflow: auto;
   border-radius: 4px;
   outline: none;
-  padding: 20px;
+  padding: 40px;
   z-index: 2;
   box-shadow: 0px 0px 50px 5px black;
-  color: black;
+  color: white;
+  box-sizing: border-box;
+  text-align: center;
+  /* text-shadow: 2px 2px black; */
+}
+
+.info-content p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+.info-content h2 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 24px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid white;
+}
+
+.info-content h3 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 20px;
+}
+
+.info-left {
+  text-align: left;
+}
+
+p.info-left {
+  text-indent: 2em;
+}
+
+h3.info-left::after {
+  content: '';
+  height: 1px;
+  position: absolute;
+  margin-top: 12px;
+  right: 40px;
+  width: 67%;
+  background-color: white;
+}
+
+.info-right {
+  text-align: right;
+}
+
+h3.info-right::before {
+  content: '';
+  height: 1px;
+  position: absolute;
+  margin: 0 auto;
+  left: 40px;
+  margin-top: 12px;
+  width: 65%;
+  background-color: white;
 }
 
 .info-portal {
