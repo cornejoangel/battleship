@@ -141,3 +141,10 @@ h3.info-right::before {
     text-indent: 1em;
   }
 }
+
+@media (min-width: 1366px) {
+  .info-content {
+    height: 860px;
+    max-height: 80%;
+  }
+}
