@@ -17,3 +17,9 @@
 .random:hover {
   background-color: rgba(75, 80, 150, 0.8);
 }
+
+@media (max-width: 768px) {
+  .random {
+    grid-row: 1;
+  }
+}

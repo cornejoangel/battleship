@@ -15,3 +15,17 @@
 .enemy {
   grid-column: 2;
 }
+
+@media (max-width: 768px) {
+  .grid {
+    grid-column: 1;
+  }
+
+  .friendly {
+    grid-row: 3;
+  }
+
+  .enemy {
+    grid-row: 2;
+  }
+}

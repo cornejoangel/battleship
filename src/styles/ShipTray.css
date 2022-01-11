@@ -18,3 +18,10 @@
   border: none;
   box-shadow: none;
 }
+
+@media (max-width: 768px) {
+  .ship-tray {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
