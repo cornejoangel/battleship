@@ -1,5 +1,5 @@
 .start {
-  font-size: 70px;
+  font-size: 8vw;
   font-family: 'Share Tech Mono', monospace;
   text-transform: uppercase;
   background-color: #e91212;
@@ -13,4 +13,11 @@
 
 .start:hover {
   background-color: rgba(233, 18, 18, 0.95);
+}
+
+@media (min-width: 1366px) {
+  .start {
+    border: 7px groove #c01111;
+    box-shadow: 3px 3px #c01010;
+  }
 }

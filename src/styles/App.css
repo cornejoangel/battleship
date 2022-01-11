@@ -60,3 +60,9 @@ h2 {
     display: none;
   }
 }
+
+@media (min-width: 1366px) {
+  .tray-info {
+    font-size: 20px;
+  }
+}
