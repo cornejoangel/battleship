@@ -13,3 +13,9 @@
   text-transform: uppercase;
   
 }
+
+@media (max-width: 768px) {
+  .message-container {
+    font-size: 20px;
+  }
+}

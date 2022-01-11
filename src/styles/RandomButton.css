@@ -20,6 +20,6 @@
 
 @media (max-width: 768px) {
   .random {
-    grid-row: 1;
+    margin-top: 10px;
   }
 }

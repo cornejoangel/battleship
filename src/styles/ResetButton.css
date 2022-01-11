@@ -18,3 +18,11 @@
 .reset:hover {
   background-color: #4b5096;
 }
+
+@media (max-width: 768px) {
+  .reset {
+    grid-column: 1;
+    grid-row: 1;
+    margin-right: 16px;
+  }
+}

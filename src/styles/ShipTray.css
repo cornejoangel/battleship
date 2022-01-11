@@ -23,5 +23,8 @@
   .ship-tray {
     grid-column: 1;
     grid-row: 2;
+    width: 90vw;
+    height: 90vw;
+    margin-top: 10px;
   }
 }
