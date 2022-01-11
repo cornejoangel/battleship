@@ -123,4 +123,21 @@ h3.info-right::before {
     grid-row: 1;
     margin-right: 100px;
   }
+
+  .info-content {
+    width: 90%;
+    height: 95%;
+  }
+
+  h3.info-left::after {
+    width: 25%;
+  }
+
+  h3.info-right::before {
+    width: 20%;
+  }
+
+  p.info-left {
+    text-indent: 1em;
+  }
 }
