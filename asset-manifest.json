@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/battleship/static/css/main.4d4c1a7d.chunk.css",
+    "main.js": "/battleship/static/js/main.5b378a44.chunk.js",
+    "main.js.map": "/battleship/static/js/main.5b378a44.chunk.js.map",
+    "runtime-main.js": "/battleship/static/js/runtime-main.d9d13fce.js",
+    "runtime-main.js.map": "/battleship/static/js/runtime-main.d9d13fce.js.map",
+    "static/js/2.a0e30d8b.chunk.js": "/battleship/static/js/2.a0e30d8b.chunk.js",
+    "static/js/2.a0e30d8b.chunk.js.map": "/battleship/static/js/2.a0e30d8b.chunk.js.map",
+    "index.html": "/battleship/index.html",
+    "static/css/main.4d4c1a7d.chunk.css.map": "/battleship/static/css/main.4d4c1a7d.chunk.css.map",
+    "static/js/2.a0e30d8b.chunk.js.LICENSE.txt": "/battleship/static/js/2.a0e30d8b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d9d13fce.js",
+    "static/js/2.a0e30d8b.chunk.js",
+    "static/css/main.4d4c1a7d.chunk.css",
+    "static/js/main.5b378a44.chunk.js"
+  ]
+}
