@@ -17,8 +17,11 @@
     "react-test-renderer": "^17.0.2",
     "web-vitals": "^1.1.2"
   },
+  "homepage": "http://cornejoangel.github.io/battleship",
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "battleship -d build",
     "build": "react-scripts build",
     "test": "jest",
     "watch": "jest --watch *.js",
@@ -60,6 +63,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.4.1",
     "typescript": "^4.4.4"
   }
