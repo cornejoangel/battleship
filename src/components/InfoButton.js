@@ -31,7 +31,7 @@ const InfoButton = () => {
         <p>
           Battleship is a 2 player game where each player places an identical
           set of ships onto a grid in whatever locations they choose. The
-          players then take turns "attacking" specific tiles on their opponents
+          players then take turns "attacking" specific tiles on their opponent's
           grid. When a tile that contains a section of a ship is attacked, that
           section of ship is damaged. If all of a ship's sections are damaged
           then that ship is sunk. The first player to sink all of their
