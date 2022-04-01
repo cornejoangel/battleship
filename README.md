@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# Battleship
+Battleship is an implementation of the [classic game](https://en.wikipedia.org/wiki/Battleship) of the same name. Created by **Angel Cornejo** as part of [*The Odin Project*](https://www.theodinproject.com/), Battleship is a React single page app styled with pure CSS and developed using test-driven-development with Jest. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**[VIEW IT LIVE HERE](https://cornejoangel.github.io/battleship/)**
 
-## Available Scripts
+## Features
+- Responsive mobile layout
+- Intuitive drag-and-drop interface for ship placement using react-dnd
+- AI algorithm that knows when it has gotten a hit and will search for the rest of your ship until it is sunk
 
-In the project directory, you can run:
+## A Brief Tour
+1. When you first open the app you are shown a grid and a square tray that houses your ships.
+2. Drag a ship by picking them up by their *front* tile. The front tile is the lighter colored one, with the larger border. You can still drag a ship from a spot that isn't the front but you will notice the ship slide over a bit when you drop it.
+3. Alternatively, you could just press the RANDOMIZE SHIPS button to place all of your ships at once. You are still free to move your ships around afterward.
+4. Also note that you can rotate your ships at any time by clicking on any part of the ship.
+5. When you are happy with the placement of your ships press the menacingly large **START GAME** button.
+6. The area that was once the ship tray (and subsequently the start button) is now the enemy's grid. Your ships have changed color and their fronts are no longer accentuated to reflect that you can no longer move them.
+7. Make a move by clicking on any tile in the enemy grid. For each (valid) move you make, your enemy will immediately retaliate! Attacked tiles will change color to indicate if it was a hit (red) or a miss (white). The result of your most recent move, along with your enemy's, is recorded below the two grids. In addition, the most recent attack your enemy performed is highlighted with a large gold border. If you try to attack a tile that you have already attacked, you will not lose your turn and the game will simply wait for you to make a valid move.
+8. When you (or your opponent) have struck every tile that makes up an individual ship, that ship will be sunk and it will change to a darker shade of red.
+9. The game ends when either player sinks all of their opponent's ships. Don't underestimate your foe! When the game is over you can play again by hitting the reset button in the top right corner. You could also do this at any other time.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Made With
+- [React DnD](https://github.com/react-dnd/react-dnd/) for the drag-and-drop ship placement
+- [react-modal](https://github.com/reactjs/react-modal) for the modal the comes up when you press the info button
